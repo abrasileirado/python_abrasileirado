@@ -41,7 +41,8 @@ dont apply a mask on inputs.
 * [ ] Código de barra de título
 * [ ] Nota fiscal eletrônica
 * [ ] Código de município do IBGE (https://github.com/chinnonsantos/sql-paises-estados-cidades https://concla.ibge.gov.br/classificacoes/por-tema/codigo-de-areas/codigo-de-areas)
-* [ ] 
+* [ ]  is_only_digits
+* [ ]  apply_mask
 
 
 ## Funções
