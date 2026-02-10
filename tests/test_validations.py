@@ -39,25 +39,25 @@ class TestPythonBrfiedValidations(TestCase):
 
     def test_apply_mask(self):
 
-        # valor perfeito com ou sem máscara
+        # perfect value with or without mask
         self.assertEqual('1/2-3', apply_mask('123', '9/0-0'))
         self.assertEqual('12.345-678', apply_mask('12.345-678', '99.999-999'))
         self.assertEqual('12.345-678', apply_mask('12345678', '99.999-999'))
 
-        # valor None com ou sem máscara
+        # None value with or without mask
         self.assertRaises(AttributeError, apply_mask, None, '99.999-999')
         self.assertRaises(AttributeError, apply_mask, '01.234-567', None)
 
-        # valor menor com ou sem máscara
+        # smaller value with or without mask
         self.assertEqual('00.000-000', apply_mask('', '99.999-999'))
         self.assertEqual('01.234-567', apply_mask('01.234-567', '99.999-999'))
         self.assertEqual('01.234-567', apply_mask('1234567', '99.999-999'))
 
-        # Valor maior com ou sem máscara
+        # larger value with or without mask
         self.assertRaises(MaskException, apply_mask, '123456789', '99.999-999')
         self.assertRaises(MaskException, apply_mask, '123.456-789', '99.999-999')
 
-        # Máscara sem dígito na composição
+        # mask without digits in composition
         self.assertRaises(MaskException, apply_mask, '123.456-789', '')
         self.assertRaises(MaskException, apply_mask, '123.456-789', '.+-*/')
 
