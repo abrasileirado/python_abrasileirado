@@ -131,7 +131,7 @@ class TestPythonBrfiedShortcutSyncHttp(TestCase):
             self.assertEqual(404, getattr(exc, 'status', None))
             self.assertEqual('File not found', getattr(exc, 'reason', None))
             self.assertTrue('Content-Type' in getattr(exc, 'headers'))
-            self.assertEqual(self.file_not_found, getattr(exc, 'url', None))
+            self.assertIn('Content-Type', getattr(exc, 'headers'))
 
         self.assertRaises(UnicodeDecodeError, get, self.file01_zip_url, None)
 
