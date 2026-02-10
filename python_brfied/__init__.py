@@ -30,49 +30,20 @@ from python_brfied import env as env
 from python_brfied import exceptions as exceptions
 from python_brfied import validations as validations
 from python_brfied.shortcuts import zip as zip  # type: ignore
-__all__ = [
-__all__ = [
-    "choices",
-    "datetime",
-    "env",
-    "exceptions",
-    "validations",
-    "zip",
-    "str2bool",
-    "percentage",
-    "instantiate_class",
-    "build_chain",
-    "BaseHandler",
-    "BaseDirector",
-]
-    "choices",
-
-    "datetime",
-    "env",
-    "exceptions",
-    "validations",
-    "zip",
-    "str2bool",
-    "percentage",
-    "instantiate_class",
-    "build_chain",
-    "BaseHandler",
-    "BaseDirector",
-]
-    "choices",
-
-    "datetime",
-    "env",
-    "exceptions",
-    "validations",
-    "zip",
-    "str2bool",
-    "percentage",
-    "instantiate_class",
-    "build_chain",
-    "BaseHandler",
-    "BaseDirector",
-]
+    __all__ = [
+        "choices",
+        "datetime",
+        "env",
+        "exceptions",
+        "validations",
+        "zip",
+        "str2bool",
+        "percentage",
+        "instantiate_class",
+        "build_chain",
+        "BaseHandler",
+        "BaseDirector",
+    ]
 
 
 def str2bool(v):
