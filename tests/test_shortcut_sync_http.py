@@ -30,7 +30,6 @@ from http.client import HTTPException
 from python_brfied.shortcuts.sync_http import get, get_json, get_zip, get_zip_content, get_zip_csv_content, \
     get_zip_fwf_content
 from pyfwf.descriptors import HeaderRowDescriptor, DetailRowDescriptor
-from pyfwf.columns import CharColumn
 from tests import FILE01_CSV_EXPECTED, FILE01_CSV_EXPECTED_BINARY, FILE01_CSV_EXPECTED_LATIN1
 from tests import FILE02_JSON_EXPECTED, FILE02_JSON_EXPECTED_BINARY, FILE02_JSON_EXPECTED_LATIN1
 from tests import ZIP_EXPECTED, JSON_EXPECTED, CSV_EXPECTED
