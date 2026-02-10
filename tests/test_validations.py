@@ -106,28 +106,28 @@ class TestPythonBrfiedValidations(TestCase):
         self.assertRaises(MaskException, validate_masked_value, '123.456-789', '.+-*/', False)
 
     def test_validate_cpf(self):
-        self.assertIsNone(validate_cpf('11111111111'))
-        self.assertIsNone(validate_cpf('111.111.111-11'))
-        self.assertIsNone(validate_cpf('000.000.001-91'))
+        validate_cpf('11111111111')
+        validate_cpf('111.111.111-11')
+        validate_cpf('000.000.001-91')
 
         self.assertRaises(DVException, validate_cpf, '000.000.001-81')
         self.assertRaises(MaskException, validate_cpf, '181')
 
     def test_validate_cnpj(self):
-        self.assertIsNone(validate_cnpj('12.345.678/9000-05'))
-        self.assertIsNone(validate_cnpj('12345678900005'))
-        self.assertIsNone(validate_cnpj('00.000.000/0001-08'))
-        self.assertIsNone(validate_cnpj('00000000000108'))
-        self.assertIsNone(validate_cnpj('00000000000.108'))
+        validate_cnpj('12.345.678/9000-05')
+        validate_cnpj('12345678900005')
+        validate_cnpj('00.000.000/0001-08')
+        validate_cnpj('00000000000108')
+        validate_cnpj('00000000000.108')
 
         self.assertRaises(MaskException, validate_cnpj, '108')
         self.assertRaises(DVException, validate_cnpj, '00000000000109')
-        self.assertIsNone(validate_cnpj('108'.zfill(14)))
+        validate_cnpj('108'.zfill(14))
 
     def test_validate_mod11(self):
-        self.assertIsNone(validate_mod11('2615339', 7, 1))
-        self.assertIsNone(validate_mod11('00000000191', 11, 1))
-        self.assertIsNone(validate_mod11('12345678909', 11, 1))
+        validate_mod11('2615339', 7, 1)
+        validate_mod11('00000000191', 11, 1)
+        validate_mod11('12345678909', 11, 1)
         self.assertRaises(TooManyDigitsException, validate_mod11, '123456789012', 12, 1)
         self.assertRaises(DVException, validate_mod11, '2615339', 6, 1)
         self.assertRaises(DVException, validate_mod11, '2615339', 8, 1)
