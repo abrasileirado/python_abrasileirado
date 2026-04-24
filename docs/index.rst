@@ -80,25 +80,7 @@ Requires Python 3.10+.
 Quick example
 -------------
 
-.. code-block::python
-
-    from pyfwf.columns import CharColumn, PositiveIntegerColumn, PositiveDecimalColumn
-    from pyfwf.descriptors import DetailRowDescriptor, FileDescriptor
-    from pyfwf.readers import Reader
-
-    detail = DetailRowDescriptor([
-        CharColumn('name', 30),
-        PositiveIntegerColumn('age', 3),
-        PositiveDecimalColumn('salary', 9, decimals=2),
-    ])
-
-    fd = FileDescriptor(details=[detail])
-
-    with open('data.fwf', 'r') as f:
-        reader = Reader(f, fd)
-        for row in reader:
-            print(row)
-    # {'name': 'Alice Smith', 'age': 30, 'salary': 3500.00}
+To do
 
 .. toctree::
    :maxdepth: 1
