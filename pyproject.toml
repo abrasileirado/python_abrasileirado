@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=82.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abrasileirado"
+version = "1.0.0"
+description = "Python library specific brazilian objects and validations."
+readme = "README.md"
+license = { file = "LICENSE.md" }
+authors = [{ name = "Kelson da Costa Medeiros", email = "kelsoncm@gmail.com" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=4.6.0",
+    "black>=26.3.1",
+    "ruff>=0.15.11",
+    "doc8>=2.0.0",
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
+    "python-dotenv>=1.2.2",
+    "pytest-coverage-gate>=1.0.3"
+]
+
+[project.urls]
+Homepage = "https://github.com/abrasileirado/python_abrasileirado"
+Issues = "https://github.com/abrasileirado/python_abrasileirado/issues"
+Download = "https://github.com/abrasileirado/python_abrasileirado/releases/"
+Docs = "https://abrasileirado.github.io/python_abrasileirado/"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["abrasileirado"]
+
+[tool.coverage.run]
+source = ["abrasileirado"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "S"]
+
+[tool.black]
+line-length = 120

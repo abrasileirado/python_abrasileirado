@@ -25,25 +25,12 @@ __author__ = 'Kelson da Costa Medeiros <kelsoncm@gmail.com>'
 
 
 import re
-from .exceptions import MaskException, EmptyMaskException, DVException, \
-    MaskWithoutDigitsException, MaskWithoutSpecialCharsException, MaskNotStringException, TooManyDigitsException
+from .exceptions import MaskException, EmptyMaskException, DVException, MaskWithoutDigitsException, MaskWithoutSpecialCharsException, MaskNotStringException, TooManyDigitsException
+from abrasileirado import only_digits
 
-
-CPF_MASK = '999.999.999-00'
-CPF_RE = re.compile(r'^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$')
-
-CNPJ_MASK = '99.999.999/9999-00'
-CNPJ_RE = re.compile('^(\d{2})[.-]?(\d{3})[.-]?(\d{3})/(\d{4})-(\d{2})$')
-
-CEP_MASK = '99999-999'
-CEP_RE = '^\d{5}-\d{3}$'
 
 PROCESSO_MASK = '9999999-99.9999.9.99.9999'
 PROCESSO_RE = re.compile('^(\d{7})-?(\d{2})\.?(\d{4})\.?(\d)\.?(\d{2})\.?(\d{4})$')
-
-
-def only_digits(seq):
-    return ''.join(c for c in filter(type(seq).isdigit, seq))
 
 
 def apply_mask(value, mask):
@@ -74,39 +61,6 @@ def validate_masked_value(value, mask, force=True):
         if (not m.isdigit() and m != v) or m.isdigit() != v.isdigit():
             raise MaskException()
     return masked_value
-
-
-def validate_cpf(unmasked_value, *args, **kwargs):
-    value = only_digits(unmasked_value)
-
-    if len(value) != 11:
-        raise MaskException('O CPF deve ter exatamente 11 digitos')
-
-    dv1 = sum([int(value[i]) * (10-i) for i in range(0, 9)]) * 10 % 11
-    dv2 = sum([int(value[i]) * (11-i) for i in range(0, 10)]) * 10 % 11
-    dv1 = dv1 if dv1 != 10 else 0
-    dv2 = dv2 if dv2 != 10 else 0
-
-    if value[-2:] != "%d%d" % (dv1, dv2):
-        raise DVException('O dígito verificador informado está inválido')
-
-
-def validate_cnpj(unmasked_value, *args, **kwargs):
-    value = only_digits(unmasked_value)
-
-    if len(value) != 14:
-        raise MaskException('O CNPJ ter exatamente 14 digitos')
-
-    c1 = (5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
-    c2 = (6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
-    dv1 = sum([int(value[i]) * c1[i] for i in range(0, 12)])
-    dv2 = sum([int(value[i]) * c2[i] for i in range(0, 13)])
-    dv1 = 11 - dv1 % 11 if dv1 % 11 > 2 else 0
-    dv2 = 11 - dv2 % 11 if dv2 % 11 > 2 else 0
-    dvs = "%d%d" % (dv1, dv2)
-
-    if value[-2:] != dvs:
-        raise DVException('O dígito verificador informado está inválido')
 
 
 def validate_mask(mask):

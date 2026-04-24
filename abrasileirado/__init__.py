@@ -24,14 +24,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 __author__ = 'Kelson da Costa Medeiros <kelsoncm@gmail.com>'
 
 from typing import List
-from python_brfied import choices as choices
-from python_brfied import datetime as datetime
-from python_brfied import env as env
-from python_brfied import exceptions as exceptions
-from python_brfied import validations as validations
-from python_brfied.shortcuts import zip as zip  # type: ignore
+from abrasileirado import enums as enums
+from abrasileirado import datetime as datetime
+from abrasileirado import env as env
+from abrasileirado import exceptions as exceptions
+from abrasileirado import validations as validations
+from abrasileirado.shortcuts import zip as zip  # type: ignore
     __all__ = [
-        "choices",
+        "enums",
         "datetime",
         "env",
         "exceptions",
@@ -123,3 +123,7 @@ class BaseDirector(object):
     def on_stop(self, *args, **kwargs):
         for link in self._links:
             link.on_stop(*args, **kwargs)
+
+
+def only_digits(seq):
+    return ''.join(c for c in filter(type(seq).isdigit, seq))

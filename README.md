@@ -1,21 +1,44 @@
 # Python BRfied
 
-Why I create BRfied? Because localflavors dont validate user data and
-dont apply a mask on inputs.
+![License](https://img.shields.io/badge/License-MIT-lemon.svg)]
+[![Python](https://img.shields.io/pypi/pyversions/abrasileirado.svg)](https://pypi.org/project/abrasileirado/)
+[![QA](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/qa.yml/badge.svg)](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/qa.yml)
+[![Coverage](https://codecov.io/gh/abrasileirado/python_abrasileirado/branch/main/graph/badge.svg)](https://codecov.io/gh/abrasileirado/python_abrasileirado)
+[![Publish](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/publish.yml/badge.svg)](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/publish.yml)
+[![Docs](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/docs.yml/badge.svg)](https://abrasileirado.github.io/python_abrasileirado/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
+
+Python library specific brazilian objects and validations.
+
+> Why I create abrasileirado? Because **this is Brazil** (Toretto, 2020).
 
 
 ## Data types
 
-* [x] Estado Civil
-* [x] Raça
-* [x] Sexo
-* [x] Sexo opcional
-* [x] Zona de habitação
-* [x] Região geopolítica
-* [x] Sim/Não
-* [x] Sim/Não opcional 
-* [x] Necessidade especial
-* [x] Unidade federativa
+* ✅ Sim/Não (Enum)
+* ✅ Estado Civil (Enum) - Instituto Brasileiro de Geografia e Estatística (IBGE)
+* ✅ Cor/Raça (Enum) - IBGE
+* ✅ Sexo (Enum) - IBGE
+* ✅ Gênero (Enum) - IBGE*
+* ✅ Deficiência (Enum) - IBGE
+* ✅ Zona de habitação (Enum) - IBGE
+* ✅ Região geopolítica (Enum) - IBGE
+* ✅ Unidade federativa (Enum) - IBGE
+* ✅ CEP - Código de Endereçamento Postal - Empresa de Correio e Telegráfos (ECT)
+* ✅ CNES - Cadastro Nacional de Estabelecimento de Saúde - DATASUS
+* ✅ CNS - Cadastro Nacional de Saúde (Cartão SUS) - DATASUS
+* ✅ CPF - Cadastro de Pessoa Física - Receita Federal do Brasil (RFB)
+* ✅ CNPJ - Cadastro Nacional de Pessoa Jurídica - RFB
+* 🚫 Modulo11
+* 🚫 ProtocoloIntegrado
+* 🚫 ProtocoloJustica
+* 🚫 PJE
+* 🚫 Boleto
+* 🚫 NFE
+* 🚫 Municipio
+
+
 
 
 ## Validações e formatações
@@ -53,51 +76,4 @@ dont apply a mask on inputs.
 * [x] build_chain
 * [x] only_digits
 * [x] apply_mask
-
-
-## Sync HTTP requests shortcuts
-
-* [x] requests_get
-* [x] get_json
-* [x] get_zip
-* [x] get_zip_content
-* [x] get_zip_csv_content
-* [x] get_zip_fwf_content
-
-
-## Classes
-* [x] BaseHandler
-* [x] BaseDirector
-
-
-## ZIP shortcuts
-
-* [x] unzip_content
-* [x] unzip_csv_content
-* [x] unzip_fwf_content
-
-
-## LICENSE
-
-The MIT License (MIT)
-
-Copyright (c) 2015 kelsoncm
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
