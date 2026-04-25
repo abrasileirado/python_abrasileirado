@@ -31,7 +31,7 @@ jobs:
           python -m pip install --upgrade pip uv
           uv pip install --system --upgrade -e ".[dev]"
 
-      - name: Check Python formatting (black + isort)
+      - name: Check Python formatting (black)
         run: |
           black . --check
 

@@ -3,29 +3,16 @@ from abrasileirado.enums import UnidadeFederativaStrEnum
 
 
 class CodigoValidavel:
-    """ Classe base para representar códigos que podem ser validados, como CPF, CNPJ, CEP, etc.
-        Essa classe é imutável e serve como base para outras classes de tipos específicos.
-        Subclasses devem implementar o método is_valid para validar o código específico.
-
-        Attributes:
-            __clean_code (str): O código limpo, contendo apenas os dígitos.
-            __masked_code (str): O código formatado com máscara, se aplicável.
-
-        Methods:
-            digitos: Retorna apenas os dígitos do código, sem máscara.
-            __str__: Retorna o código formatado com máscara.
-            is_valid: Método de classe que deve ser implementado pelas subclasses para validar o código específico.
-            __only_digits: Método de classe que retorna apenas os dígitos do código, sem máscara.
-        """
-
-    __full_digits = 1  # Deve ser definido pelas subclasses para indicar o nº total de dígitos esperados (sem máscara)
-
     def __init__(self, code: str):
-        if not self.is_valid(code):
+        if not self._is_valid(code):
             classname = self.__class__.__name__
-            raise ValueError(f"{classname} inválido: O {classname} tem que ser válido.")
-        self.__clean_code: str = self.__only_digits(code).zfill(self.__full_digits)
-        self.__masked_code: str = self.__mask_code(code)
+            raise ValueError(f"{classname} inválido.")
+        self.__clean_code: str = self._only_digits(code).zfill(self._full_digits)
+        self.__masked_code: str = self._mask_code(code)
+
+    @property
+    def _full_digits(self) -> int:
+        return 1
 
     @property
     def digitos(self) -> str:
@@ -36,13 +23,11 @@ class CodigoValidavel:
         """ Retorna o código formatado com máscara, se aplicável. """
         return self.__masked_code
 
-    @classmethod
-    def __only_digits(cls, code: str) -> str:
+    def _only_digits(self, code: str) -> str:
         """ Retorna apenas os dígitos do código, sem máscara. """
         return ''.join(c for c in filter(str.isdigit, code))
 
-    @classmethod
-    def __mask_code(cls, code: str) -> str:
+    def _mask_code(self, code: str) -> str:
         """ Retorna o código formatado com máscara, se aplicável. Subclasses devem implementar esse método para aplicar 
             a máscara específica do código.
 
@@ -52,10 +37,9 @@ class CodigoValidavel:
             Returns:
                 str: O código formatado com máscara.
         """
-        return cls.__only_digits(code).zfill(cls.__full_digits)
+        return self._only_digits(code).zfill(self._full_digits)
 
-    @classmethod
-    def _basic_digits_validation(cls, code: str) -> str | None:
+    def _basic_digits_validation(self, code: str) -> str | None:
         """ Realiza validações básicas comuns a códigos numéricos, como quantidade de dígitos, não aceitar todos os dígitos iguais, etc.
             Subclasses podem usar esse método para realizar validações básicas antes de implementar validações específicas adicionais, como dígitos verificadores, formato, etc.
 
@@ -66,23 +50,25 @@ class CodigoValidavel:
                 str: O código limpo contendo apenas os dígitos, se as validações básicas forem aprovadas.
                 bool: False se as validações básicas falharem.
         """
-        value = cls.__only_digits(code)
+        if code is None:
+            return None
+
+        value = self._only_digits(code)
 
         # Não informou ou informou uma string vazia
         if value is None or value.strip() == '':
             return None
 
         # Com menos de 3 dígitos não é válido, mesmo que os dígitos verificadores sejam tecnicamente corretos
-        if len(value.strip()) < 3 or len(value.strip()) > cls.__full_digits:
+        if len(value.strip()) < 3 or len(value.strip()) > self._full_digits:
             return None
 
         # Não aceita todos os dígitos iguais
-        if value == (value[0] * cls.__full_digits):
+        if value == (value[0] * self._full_digits):
             return None
         return value
 
-    @classmethod
-    def is_valid(cls, code: str) -> bool:
+    def _is_valid(self, code: str) -> bool:
         """ Verifica se o código é válido, realizando validações básicas como quantidade de dígitos, não aceitar todos os dígitos iguais, etc.
             Subclasses devem implementar validações específicas adicionais, como dígitos verificadores, formato, etc.
 
@@ -92,17 +78,21 @@ class CodigoValidavel:
             Returns:
                 bool: True se o código for válido, False caso contrário.
         """
-        return len(cls._basic_digits_validation(code) or "") == cls.__full_digits
+        return len(self._basic_digits_validation(code) or "") == self._full_digits
 
 
 class CNES(CodigoValidavel):
     """Classe imutável para representar um CNES (Cadastro Nacional de Estabelecimento de Saúde)."""
-    __full_digits = 7
+    @property
+    def _full_digits(self) -> int:
+        return 7
 
 
 class CNS(CodigoValidavel):
     """Classe imutável para representar um CNS (Cartão Nacional de Saúde)."""
-    __full_digits = 15
+    @property
+    def _full_digits(self) -> int:
+        return 15
 
 
 class CEP(CodigoValidavel):
@@ -129,14 +119,15 @@ class CEP(CodigoValidavel):
             print(cep2)  # Saída: 12345-678
     """
 
-    __full_digits = 8
+    @property
+    def _full_digits(self) -> int:
+        return 8
 
     MASK = '99999-999'
     REGEX = r'^\d{5}-\d{3}$'
 
-    @classmethod
-    def __mask_code(cls, code: str) -> str:
-        digits = cls.__only_digits(code)
+    def _mask_code(self, code: str) -> str:
+        digits = self._only_digits(code)
         return f"{digits[:5]}-{digits[5:]}"
 
 
@@ -181,51 +172,19 @@ class EnderecoBrasil:
 
 
 class CPF(CodigoValidavel):
-    """ Classe imutável para representar um CPF (Cadastro de Pessoa Física).
-        O CPF é um número de identificação fiscal utilizado no Brasil para pessoas físicas.
-        Ele é composto por 11 dígitos, onde os 9 primeiros são a base do número e os 2 últimos são dígitos verificadores calculados a partir dos 9 primeiros.
-        Essa classe valida o CPF no momento da criação, garantindo que apenas CPFs válidos possam ser instanciados.
-        O CPF pode ser representado tanto no formato apenas com dígitos (ex: 12345678909) quanto no formato com máscara (ex: 123.456.789-09).
+    @property
+    def _full_digits(self) -> int:
+        return 11
 
-        Examples:
-
-        .. code-block:: python
-            print(CPF("00000000191"))  # Saída: 000.000.001-91 (CPF completo, DV corretos, sem máscara)
-            print(CPF("000.000.001-91"))  # Saída: 000.000.001-91 (CPF completo, DV corretos, máscara perfeita)
-            print(CPF("191"))  # Saída: 000.000.191-00 (CPF parcial, DV corretos, sem máscara)
-            print(CPF("1-91").apenas_digitos)  # Saída: 0000000191 (CPF parcial, DV corretos, máscara imperfeita)
-
-            # Verificando validade (True)
-            print(CPF.is_valid("00000000191")) # CPF válido, DV corretos, sem máscara
-            print(CPF.is_valid("000.000.001-91")) # CPF válido, DV corretos, com máscara perfeita
-            print(CPF.is_valid("000000001-91")) # CPF válido, DV corretos, máscara imperfeita
-            print(CPF.is_valid("191")) # CPF parcial, 3 dígitos, DV corretos, máscara imperfeita
-
-            # Verificando validade (False)
-            print(CPF.is_valid("11111111111")) # CPF com todos os dígitos iguais é inválido
-            print(CPF.is_valid("1")) # CPF com menos de 3 dígitos é inválido
-            print(CPF.is_valid("123"))  # CPF parcial, 3 dígitos, DV inválidos
-
-            # Clonando um CPF
-            cpf2 = CPF(str(CPF("12345678909")))
-    """
-
-    __full_digits = 11
-
-    MASK = '999.999.999-00'
-    REGEX = re.compile(r'^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$')
-
-    @classmethod
-    def __mask_code(cls, code: str) -> str:
-        digits = cls.__only_digits(code).zfill(cls.__full_digits)
+    def _mask_code(self, code: str) -> str:
+        digits = self._only_digits(code).zfill(self._full_digits)
         return f"{digits[:3]}.{digits[3:6]}.{digits[6:9]}-{digits[9:]}"
 
-    @classmethod
-    def is_valid(cls, code: str):
-        value = cls._basic_digits_validation(code)
+    def _is_valid(self, code: str) -> bool:
+        value = self._basic_digits_validation(code)
         if not value:
             return False
-        v = value.zfill(cls.__full_digits)
+        v = value.zfill(self._full_digits)
         dv1 = sum([int(v[i]) * (10-i) for i in range(0, 9)]) * 10 % 11
         dv2 = sum([int(v[i]) * (11-i) for i in range(0, 10)]) * 10 % 11
         dv1 = dv1 if dv1 != 10 else 0
@@ -262,22 +221,22 @@ class CNPJ(CodigoValidavel):
             cnpj2 = CNPJ(str(CNPJ("12345678900005")))
         """ 
 
-    __full_digits = 14
-
     MASK = '99.999.999/9999-00'
-    REGEX = re.compile('^(\d{2})[.-]?(\d{3})[.-]?(\d{3})/(\d{4})-(\d{2})$')
+    REGEX = re.compile(r'^(\d{2})[.-]?(\d{3})[.-]?(\d{3})/(\d{4})-(\d{2})$')
 
-    @classmethod
-    def __mask_code(cls, code: str) -> str:
-        digits = cls.__only_digits(code).zfill(cls.__full_digits)
+    @property
+    def _full_digits(self) -> int:
+        return 14
+
+    def _mask_code(self, code: str) -> str:
+        digits = self._only_digits(code).zfill(self._full_digits)
         return f"{digits[:2]}.{digits[2:5]}.{digits[5:8]}/{digits[8:12]}-{digits[12:]}"
 
-    @classmethod
-    def is_valid(cls, code: str) -> bool:
-        value = cls._basic_digits_validation(code)
+    def _is_valid(self, code: str) -> bool:
+        value = self._basic_digits_validation(code)
         if not value:
             return False
-        v = value.zfill(cls.__full_digits)
+        v = value.zfill(self._full_digits)
         c1 = (5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
         c2 = (6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
         dv1 = sum([int(v[i]) * c1[i] for i in range(0, 12)])
@@ -286,3 +245,52 @@ class CNPJ(CodigoValidavel):
         dv2 = 11 - dv2 % 11 if dv2 % 11 > 2 else 0
         dvs = f"{dv1}{dv2}"
         return value[-2:] == dvs
+
+
+class NUP(CodigoValidavel):
+    """ Classe imutável para representar um NUP (Número Único de Processo).
+        O NUP é um número de identificação utilizado para processos judiciais e administrativos no Brasil.
+        Ele é composto por 17 dígitos, tem 17 dígitos:
+        - 5 para a unidade protocolizadora,
+        - 6 para o sequencial anual,
+        - 4 para o ano,
+        - 2 para o dígito verificador.
+
+        Essa classe valida o NUP no momento da criação, garantindo que apenas NUPs válidos possam ser instanciados.
+        O NUP pode ser representado tanto no formato apenas com dígitos (ex: 23520005177202676) quanto no formato 
+        com máscara (ex: 23520.005177/2026-76).
+    """
+
+    MASK = '99999.999999/9999-99'
+    REGEX = re.compile(r'^(\d{5})\.?(\d{6})/(\d{4})-(\d{2})$')
+
+    @property
+    def _full_digits(self) -> int:
+        return 17
+
+    def _mask_code(self, code: str) -> str:
+        digits = self._only_digits(code).zfill(self._full_digits)
+        return f"{digits[:5]}.{digits[5:11]}/{digits[11:15]}-{digits[15:]}"
+
+
+    def _is_valid(self, code: str) -> bool:
+        digits = self._only_digits(code)
+        if len(digits) != 17:
+            return False
+
+        base = digits[:15]
+        given_dv = digits[15:]
+
+        def calc_dv(number: str, start_weight: int = 2) -> int:
+            total = 0
+            weight = start_weight
+            for ch in reversed(number):
+                total += int(ch) * weight
+                weight += 1
+            dv = 11 - (total % 11)
+            return dv % 10
+
+        dv1 = calc_dv(base, 2)
+        dv2 = calc_dv(base + str(dv1), 2)
+
+        return given_dv == f"{dv1}{dv2}"

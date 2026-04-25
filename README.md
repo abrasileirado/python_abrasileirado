@@ -66,14 +66,3 @@ Python library specific brazilian objects and validations.
 * [ ] Código de município do IBGE (https://github.com/chinnonsantos/sql-paises-estados-cidades https://concla.ibge.gov.br/classificacoes/por-tema/codigo-de-areas/codigo-de-areas)
 * [ ]  is_only_digits
 * [ ]  apply_mask
-
-
-## Funções
-
-* [x] str2bool
-* [x] percentage
-* [x] instantiate_class
-* [x] build_chain
-* [x] only_digits
-* [x] apply_mask
-

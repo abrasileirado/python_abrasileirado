@@ -5,3 +5,7 @@ abrasileirado
    :maxdepth: 4
 
    abrasileirado
+   abrasileirado.enums
+   abrasileirado.types
+   abrasileirado.validations
+

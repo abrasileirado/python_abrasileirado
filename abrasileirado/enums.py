@@ -1,8 +1,6 @@
 from enum import Enum
 from typing import Any
 
-from isort import code
-
 
 class IterableEnum(Enum):
     """ Enum base que permite iterar sobre seus membros e acessar suas descrições.
@@ -80,11 +78,7 @@ class IterableEnum(Enum):
                     print(CorEnum.as_choices())
                     # Output: [(16711680, '16711680'), (65280, '65280'), (255, '255')]
         """
-        if getattr(cls, '__local_cache', None) is not None:
-            return cls.__local_cache
-
-        cls.__local_cache = [(x.value, getattr(x, 'description', str(x))) for x in cls]
-        return cls.__local_cache
+        return [(x.value, getattr(x, 'description', str(x))) for x in cls]
 
 
 class SimNaoIntEnum(IterableEnum):
