@@ -27,7 +27,7 @@ class TestCPF(TestCase):
         self.assertEqual(str(cpf), "123.456.789-09")
         self.assertEqual(cpf.digitos, "12345678909")
 
-    def test_cpf_valid(self):
+    def test_cpf_valido_leading_zeros(self):
         # CPF válido sem máscara (caso distinto de test_cpf_valido)
         cpf = CPF("00000000191")
         self.assertEqual(cpf.digitos, "00000000191")
@@ -68,15 +68,19 @@ class TestNUP(TestCase):
 
 
 class TestCNES(TestCase):
-    def test_cnes_valid(self):
+    def test_cnes_valido(self):
         cnes = CNES("1234567")
         self.assertEqual(cnes.digitos, "1234567")
         self.assertEqual(str(cnes), "1234567")
         self.assertEqual(CNES("0000001").digitos, "0000001")
         self.assertEqual(CNES("0000001").__str__(), "0000001")
+
+    def test_cnes_invalido_tamanho(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CNES("12")
+
+    def test_cnes_invalido_digitos_iguais(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNES("1111111")
@@ -87,9 +91,13 @@ class TestCNS(TestCase):
         cns = CNS("123456789012345")
         self.assertEqual(cns.digitos, "123456789012345")
         self.assertEqual(str(cns), "123456789012345")
+
+    def test_cns_invalido_tamanho(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CNS("12")
+
+    def test_cns_invalido_digitos_iguais(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNS("111111111111111")
@@ -103,6 +111,8 @@ class TestCEP(TestCase):
         cep2 = CEP("12.345-678")
         self.assertEqual(cep2.digitos, "12345678")
         self.assertEqual(str(cep2), "12345-678")
+
+    def test_cep_invalid(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CEP("12")
@@ -120,6 +130,8 @@ class TestCNPJ(TestCase):
         cnpj2 = CNPJ("12.345.678/9000-05")
         self.assertEqual(cnpj2.digitos, "12345678900005")
         self.assertEqual(str(cnpj2), "12.345.678/9000-05")
+
+    def test_cnpj_invalid(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNPJ("11111111111111")
