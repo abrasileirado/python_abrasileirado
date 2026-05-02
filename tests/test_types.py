@@ -68,15 +68,19 @@ class TestNUP(TestCase):
 
 
 class TestCNES(TestCase):
-    def test_cnes_valid(self):
+    def test_cnes_valido(self):
         cnes = CNES("1234567")
         self.assertEqual(cnes.digitos, "1234567")
         self.assertEqual(str(cnes), "1234567")
         self.assertEqual(CNES("0000001").digitos, "0000001")
         self.assertEqual(CNES("0000001").__str__(), "0000001")
+
+    def test_cnes_invalido_tamanho(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CNES("12")
+
+    def test_cnes_invalido_digitos_iguais(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNES("1111111")
