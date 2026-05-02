@@ -27,6 +27,24 @@ class TestCPF(TestCase):
         self.assertEqual(str(cpf), "123.456.789-09")
         self.assertEqual(cpf.digitos, "12345678909")
 
+    def test_cpf_valid(self):
+        # CPF válido: 000.000.001-91
+        cpf = CPF("00000000191")
+        self.assertEqual(cpf.digitos, "00000000191")
+        self.assertEqual(str(cpf), "000.000.001-91")
+        cpf2 = CPF("000.000.001-91")
+        self.assertEqual(cpf2.digitos, "00000000191")
+        self.assertEqual(str(cpf2), "000.000.001-91")
+        # Inválido: todos dígitos iguais
+        with self.assertRaises(ValueError):
+            CPF("11111111111")
+        # Inválido: menos de 3 dígitos
+        with self.assertRaises(ValueError):
+            CPF("1")
+        # Inválido: DV errado
+        with self.assertRaises(ValueError):
+            CPF("12345678900")
+
     def test_cpf_valido_com_mascara(self):
         cpf = CPF("123.456.789-09")
         self.assertEqual(str(cpf), "123.456.789-09")
@@ -103,24 +121,6 @@ class TestCEP(TestCase):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CEP("11111111")
-
-    def test_cpf_valid(self):
-        # CPF válido: 000.000.001-91
-        cpf = CPF("00000000191")
-        self.assertEqual(cpf.digitos, "00000000191")
-        self.assertEqual(str(cpf), "000.000.001-91")
-        cpf2 = CPF("000.000.001-91")
-        self.assertEqual(cpf2.digitos, "00000000191")
-        self.assertEqual(str(cpf2), "000.000.001-91")
-        # Inválido: todos dígitos iguais
-        with self.assertRaises(ValueError):
-            CPF("11111111111")
-        # Inválido: menos de 3 dígitos
-        with self.assertRaises(ValueError):
-            CPF("1")
-        # Inválido: DV errado
-        with self.assertRaises(ValueError):
-            CPF("12345678900")
 
 
 class TestCNPJ(TestCase):
