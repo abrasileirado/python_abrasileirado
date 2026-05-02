@@ -174,13 +174,15 @@ class TestEnderecoBrasil(TestCase):
 
 class TestCodigoValidavel(TestCase):
     def test_codigo_validavel_basic_validation_with_none_empty_and_nondigit_input(self):
-        # Covering line 69: if code is None: return None
-        cv = CodigoValidavel.__new__(CodigoValidavel)
-        self.assertIsNone(cv._basic_digits_validation(None))
+        # Validate behavior through public APIs (no private method calls)
+        cpf_none = CPF(None)
+        self.assertIsNone(cpf_none.digitos)
 
-        # Covering line 75: if value is None or value.strip() == '': return None
-        self.assertIsNone(cv._basic_digits_validation(""))
-        self.assertIsNone(cv._basic_digits_validation("abc"))
+        with self.assertRaises(ValueError):
+            CPF("")
+
+        with self.assertRaises(ValueError):
+            CPF("abc")
 
     def test_codigo_validavel_full_digits_default(self):
         # Validate default digit handling through observable behavior
