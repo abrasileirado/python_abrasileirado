@@ -44,7 +44,7 @@ Python library specific brazilian objects and validations.
 Compare with others packages
 ----------------------------
 
-There are several Python packages for Brazilian data validation and utilities. 
+There are several Python packages for Brazilian data validation and utilities.
 Here’s how **abrasileirado** compares to some popular alternatives:
 
 =============================== ============= ============== ========= =======
@@ -80,7 +80,7 @@ Grupo de natureza jurídica enum ✅            🚫            🚫        🚫
 Natureza jurídica enum          ✅            🚫            🚫        🚫
 =============================== ============= ============== ========= =======
 
-**abrasileirado** focuses on typed objects, enums, and validations for Brazilian-specific data, while 
+**abrasileirado** focuses on typed objects, enums, and validations for Brazilian-specific data, while
 others are more focused on document validation only.
 
 Installation

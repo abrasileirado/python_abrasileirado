@@ -376,142 +376,158 @@ class NaturezaJuridicaEnum(IterableEnum):
     )
 
     # 2. ENTIDADES EMPRESARIAIS
-    EMPRESA_PUBLICA = ("2011", "Empresa Pública", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_ECONOMIA_MISTA = ("2038", "Sociedade de Economia Mista", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_ANONIMA_ABERTA = ("2046", "Sociedade Anônima Aberta", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_ANONIMA_FECHADA = ("2054", "Sociedade Anônima Fechada", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
+    EMPRESA_PUBLICA = ("2011", "Empresa Pública", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    SOCIEDADE_ECONOMIA_MISTA = ("2038", "Sociedade de Economia Mista", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    SOCIEDADE_ANONIMA_ABERTA = ("2046", "Sociedade Anônima Aberta", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    SOCIEDADE_ANONIMA_FECHADA = ("2054", "Sociedade Anônima Fechada", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
     SOCIEDADE_EMPRESARIA_LIMITADA = (
         "2062",
         "Sociedade Empresária Limitada",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_EMPRESARIA_NOME_COLETIVO = (
         "2076",
         "Sociedade Empresária em Nome Coletivo",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_EMPRESARIA_COMANDITA_SIMPLES = (
         "2089",
         "Sociedade Empresária em Comandita Simples",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_EMPRESARIA_COMANDITA_ACOES = (
         "2097",
         "Sociedade Empresária em Comandita por Ações",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_MERCANTIL_EXTINTA = (
         "2100",
         "Sociedade Mercantil de Capital e Indústria (extinta pelo NCC/2002)",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_EMPRESARIA_CONTA_PARTICIPACAO = (
         "2127",
         "Sociedade Empresária em Conta de Participação",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
-    EMPRESARIO_INDIVIDUAL = ("2135", "Empresário (Individual)", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    COOPERATIVA = ("2143", "Cooperativa", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    CONSORCIO_SOCIEDADES = ("2151", "Consórcio de Sociedades", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    GRUPO_SOCIEDADES = ("2160", "Grupo de Sociedades", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
+    EMPRESARIO_INDIVIDUAL = ("2135", "Empresário (Individual)", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    COOPERATIVA = ("2143", "Cooperativa", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    CONSORCIO_SOCIEDADES = ("2151", "Consórcio de Sociedades", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    GRUPO_SOCIEDADES = ("2160", "Grupo de Sociedades", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
     ESTABELECIMENTO_SOCIEDADE_ESTRANGEIRA = (
         "2178",
         "Estabelecimento, no Brasil, de Sociedade Estrangeira",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     ESTABELECIMENTO_EMPRESA_BINACIONAL = (
         "2194",
         "Estabelecimento, no Brasil, de Empresa Binacional Argentino-Brasileira",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
-    ENTIDADE_BINACIONAL_ITAIPU = ("2208", "Entidade Binacional Itaipu", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
+    ENTIDADE_BINACIONAL_ITAIPU = (
+        "2208",
+        "Entidade Binacional Itaipu",
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
+    )
     EMPRESA_DOMICILIADA_EXTERIOR = (
         "2216",
         "Empresa Domiciliada no Exterior",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
-    CLUBE_FUNDO_INVESTIMENTO = ("2224", "Clube/Fundo de Investimento", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_SIMPLES_PURA = ("2232", "Sociedade Simples Pura", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_SIMPLES_LIMITADA = ("2240", "Sociedade Simples Limitada", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
-    SOCIEDADE_NOME_COLETIVO = ("2259", "Sociedade em Nome Coletivo", GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL)
+    CLUBE_FUNDO_INVESTIMENTO = ("2224", "Clube/Fundo de Investimento", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    SOCIEDADE_SIMPLES_PURA = ("2232", "Sociedade Simples Pura", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
+    SOCIEDADE_SIMPLES_LIMITADA = (
+        "2240",
+        "Sociedade Simples Limitada",
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
+    )
+    SOCIEDADE_NOME_COLETIVO = ("2259", "Sociedade em Nome Coletivo", GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS)
     SOCIEDADE_COMANDITA_SIMPLES = (
         "2267",
         "Sociedade em Comandita Simples",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     SOCIEDADE_SIMPLES_CONTA_PARTICIPACAO = (
         "2275",
         "Sociedade Simples em Conta de Participação",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
     EMPRESA_INDIVIDUAL_LIMITADA = (
         "2305",
         "Empresa Individual de Responsabilidade Limitada",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_EMPRESARIAL,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_EMPRESARIAIS,
     )
 
     # 3. ENTIDADES SEM FINS LUCRATIVOS
     SERVICO_NOTARIAL_REGISTRAL = (
         "3034",
         "Serviço Notarial e Registral (Cartório)",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    ORGANIZACAO_SOCIAL = ("3042", "Organização Social", GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS)
+    ORGANIZACAO_SOCIAL = ("3042", "Organização Social", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
     OSCIP = (
         "3050",
         "Organização da Sociedade Civil de Interesse Público (Oscip)",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
     FUNDACAO_PRIVADA = (
         "3069",
         "Outras Formas de Fundações Mantidas com Recursos Privados",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
     SERVICO_SOCIAL_AUTONOMO = (
         "3077",
         "Serviço Social Autônomo",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilícios", GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilícios", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
     UNIDADE_EXECUTORA = (
         "3093",
         "Unidade Executora (Programa Dinheiro Direto na Escola)",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
     COMISSAO_CONCILIACAO_PREVIA = (
         "3107",
         "Comissão de Conciliação Prévia",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
     ENTIDADE_MEDIACAO_ARBITRAGEM = (
         "3115",
         "Entidade de Mediação e Arbitragem",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    PARTIDO_POLITICO = ("3123", "Partido Político", GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS)
-    ENTIDADE_SINDICAL = ("3131", "Entidade Sindical", GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS)
+    PARTIDO_POLITICO = ("3123", "Partido Político", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    ENTIDADE_SINDICAL = ("3131", "Entidade Sindical", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
     ESTABELECIMENTO_FUNDACAO_ASSOCIACAO_ESTRANGEIRAS = (
         "3204",
         "Estabelecimento, no Brasil, de Fundação ou Associação Estrangeiras",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
     FUNDACAO_ASSOCIACAO_EXTERIOR = (
         "3212",
         "Fundação ou Associação Domiciliada no Exterior",
-        GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS,
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    OUTRAS_ASSOCIACOES = ("3999", "Outras Formas de Associação", GrupoNaturezaJuridicaEnum.ENTIDADE_SEM_FINS_LUCRATIVOS)
+    OUTRAS_ASSOCIACOES = (
+        "3999",
+        "Outras Formas de Associação",
+        GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
+    )
     # 4. PESSOAS FÍSICAS
-    EMPRESA_INDIVIDUAL_IMOBILIARIA = ("4014", "Empresa Individual Imobiliária", GrupoNaturezaJuridicaEnum.PESSOA_FISICA)
-    SEGURADO_ESPECIAL = ("4022", "Segurado Especial", GrupoNaturezaJuridicaEnum.PESSOA_FISICA)
-    CONTRIBUINTE_INDIVIDUAL = ("4081", "Contribuinte individual", GrupoNaturezaJuridicaEnum.PESSOA_FISICA)
+    EMPRESA_INDIVIDUAL_IMOBILIARIA = (
+        "4014",
+        "Empresa Individual Imobiliária",
+        GrupoNaturezaJuridicaEnum.PESSOAS_FISICAS,
+    )
+    SEGURADO_ESPECIAL = ("4022", "Segurado Especial", GrupoNaturezaJuridicaEnum.PESSOAS_FISICAS)
+    CONTRIBUINTE_INDIVIDUAL = ("4081", "Contribuinte individual", GrupoNaturezaJuridicaEnum.PESSOAS_FISICAS)
     # 5. ORGANIZAÇÕES INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS
     ORGANIZACAO_INTERNACIONAL = (
         "5002",
         "Organização Internacional e Outras Instituições Extraterritoriais",
-        GrupoNaturezaJuridicaEnum.ORGANIZACAO_INTERNACIONAL,
+        GrupoNaturezaJuridicaEnum.ORGANIZACOES_INTERNACIONAIS,
     )
 
-    def __init__(self, value: Any, description: str, grupo: GrupoNaturezaJuridica) -> None:
+    def __init__(self, value: Any, description: str, grupo: GrupoNaturezaJuridicaEnum) -> None:
         super().__init__(value, description)
         self.grupo = grupo

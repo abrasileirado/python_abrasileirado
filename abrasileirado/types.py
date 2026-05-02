@@ -1,4 +1,5 @@
 import re
+
 from abrasileirado.enums import UnidadeFederativaStrEnum
 
 
@@ -40,8 +41,9 @@ class CodigoValidavel:
         return self._only_digits(code).zfill(self._full_digits)
 
     def _basic_digits_validation(self, code: str) -> str | None:
-        """Realiza validações básicas comuns a códigos numéricos, como quantidade de dígitos, não aceitar todos os dígitos iguais, etc.
-        Subclasses podem usar esse método para realizar validações básicas antes de implementar validações específicas adicionais, como dígitos verificadores, formato, etc.
+        """Realiza validações básicas comuns a códigos numéricos, como quantidade de dígitos, não aceitar todos os
+        dígitos iguais, etc. Subclasses podem usar esse método para realizar validações básicas antes de implementar
+        validações específicasadicionais, como dígitos verificadores, formato, etc.
 
         Arguments:
             code (str): O código a ser validado.
@@ -69,7 +71,8 @@ class CodigoValidavel:
         return value
 
     def _is_valid(self, code: str) -> bool:
-        """Verifica se o código é válido, realizando validações básicas como quantidade de dígitos, não aceitar todos os dígitos iguais, etc.
+        """Verifica se o código é válido, realizando validações básicas como quantidade de dígitos, não aceitar todos
+        os dígitos iguais, etc.
         Subclasses devem implementar validações específicas adicionais, como dígitos verificadores, formato, etc.
 
         Arguments:
@@ -85,7 +88,8 @@ class CNES(CodigoValidavel):
     """Classe imutável para representar um CNES (Cadastro Nacional de Estabelecimento de Saúde).
     O CNES é um número de identificação utilizado para estabelecimentos de saúde no Brasil, composto por 7 dígitos.
     Essa classe valida o CNES no momento da criação, garantindo que apenas CNES válidos possam ser instanciados.
-    O CNES pode ser representado tanto no formato apenas com dígitos (ex: 1234567) quanto no formato com máscara (ex: 1234567, sem máscara).
+    O CNES pode ser representado tanto no formato apenas com dígitos (ex: 1234567) quanto no formato com máscara
+    (ex: 1234567, sem máscara).
     Examples:
     .. code-block:: python
         cnes1 = CNES("1234567")
@@ -112,9 +116,12 @@ class CNES(CodigoValidavel):
 
 class CNS(CodigoValidavel):
     """Classe imutável para representar um CNS (Cartão Nacional de Saúde).
-    O CNS é um número de identificação utilizado para cidadãos brasileiros no sistema de saúde, composto por 15 dígitos, onde os 11 primeiros são a base do número e os 4 últimos são dígitos verificadores calculados a partir dos 11 primeiros.
+    O CNS é um número de identificação utilizado para cidadãos brasileiros no sistema de saúde, composto por 15 dígitos,
+    onde os 11 primeiros são a base do número e os 4 últimos são dígitos verificadores calculados a partir dos 11
+    primeiros.
     Essa classe valida o CNS no momento da criação, garantindo que apenas CNS válidos possam ser instanciados.
-    O CNS pode ser representado tanto no formato apenas com dígitos (ex: 123456789012345) quanto no formato com máscara (ex: 123 4567 8901 2345).
+    O CNS pode ser representado tanto no formato apenas com dígitos (ex: 123456789012345) quanto no formato com máscara
+    (ex: 123 4567 8901 2345).
 
     Examples:
     .. code-block:: python
@@ -236,9 +243,11 @@ class EnderecoBrasil:
 class CPF(CodigoValidavel):
     """Classe imutável para representar um CPF (Cadastro de Pessoas Físicas).
     O CPF é um número de identificação fiscal utilizado no Brasil para pessoas físicas.
-    Ele é composto por 11 dígitos, onde os 9 primeiros são a base do número e os 2 últimos são dígitos verificadores calculados a partir dos 9 primeiros.
+    Ele é composto por 11 dígitos, onde os 9 primeiros são a base do número e os 2 últimos são dígitos verificadores
+    calculados a partir dos 9 primeiros.
     Essa classe valida o CPF no momento da criação, garantindo que apenas CPFs válidos possam ser instanciados.
-    O CPF pode ser representado tanto no formato apenas com dígitos (ex: 12345678901) quanto no formato com máscara (ex: 123.456.789-01).
+    O CPF pode ser representado tanto no formato apenas com dígitos (ex: 12345678901) quanto no formato com máscara
+    (ex: 123.456.789-01).
 
     Examples:
     .. code-block:: python
@@ -283,10 +292,12 @@ class CPF(CodigoValidavel):
 class CNPJ(CodigoValidavel):
     """Classe imutável para representar um CNPJ (Cadastro Nacional de Pessoa Jurídica).
     O CNPJ é um número de identificação fiscal utilizado no Brasil para pessoas jurídicas.
-    Ele é composto por 14 dígitos, onde os 12 primeiros são a base do número e os 2 últimos são dígitos verificadores calculados a partir dos 12 primeiros.
+    Ele é composto por 14 dígitos, onde os 12 primeiros são a base do número e os 2 últimos são dígitos verificadores
+    calculados a partir dos 12 primeiros.
 
     Essa classe valida o CNPJ no momento da criação, garantindo que apenas CNPJs válidos possam ser instanciados.
-    O CNPJ pode ser representado tanto no formato apenas com dígitos (ex: 12345678900005) quanto no formato com máscara (ex: 12.345.678/9000-05).
+    O CNPJ pode ser representado tanto no formato apenas com dígitos (ex: 12345678900005) quanto no formato com máscara
+    (ex: 12.345.678/9000-05).
     Examples:
     .. code-block:: python
         print(CNPJ("12345678900005"))  # Saída: 12.345.678/9000-05 (CNPJ completo, DV corretos, sem máscara)
