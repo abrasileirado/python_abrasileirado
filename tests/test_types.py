@@ -103,6 +103,8 @@ class TestCEP(TestCase):
         cep2 = CEP("12.345-678")
         self.assertEqual(cep2.digitos, "12345678")
         self.assertEqual(str(cep2), "12345-678")
+
+    def test_cep_invalid(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CEP("12")
