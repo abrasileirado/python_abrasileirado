@@ -204,10 +204,19 @@ class TestNUPExtra(TestCase):
 
 class TestCPFDerivedMasks(TestCase):
     def test_cpf_derived_codes_use_grouped_mask(self):
-        classes = (PIS, RENAVAM, TituloEleitoral, CNJ, Telefone, Passaporte, PlacaVeicular, Certidao)
+        expected_formats = {
+            PIS: "123 456 789 09",
+            RENAVAM: "123 456 789 09",
+            TituloEleitoral: "123 456 789 09",
+            CNJ: "123 456 789 09",
+            Telefone: "123 456 789 09",
+            Passaporte: "123 456 789 09",
+            PlacaVeicular: "123 456 789 09",
+            Certidao: "123 456 789 09",
+        }
 
-        for code_class in classes:
+        for code_class, expected_mask in expected_formats.items():
             with self.subTest(code_class=code_class.__name__):
                 code = code_class("12345678909")
                 self.assertEqual(code.digitos, "12345678909")
-                self.assertEqual(str(code), "123 456 789 09")
+                self.assertEqual(str(code), expected_mask)
