@@ -28,22 +28,10 @@ class TestCPF(TestCase):
         self.assertEqual(cpf.digitos, "12345678909")
 
     def test_cpf_valid(self):
-        # CPF válido: 000.000.001-91
+        # CPF válido sem máscara (caso distinto de test_cpf_valido)
         cpf = CPF("00000000191")
         self.assertEqual(cpf.digitos, "00000000191")
         self.assertEqual(str(cpf), "000.000.001-91")
-        cpf2 = CPF("000.000.001-91")
-        self.assertEqual(cpf2.digitos, "00000000191")
-        self.assertEqual(str(cpf2), "000.000.001-91")
-        # Inválido: todos dígitos iguais
-        with self.assertRaises(ValueError):
-            CPF("11111111111")
-        # Inválido: menos de 3 dígitos
-        with self.assertRaises(ValueError):
-            CPF("1")
-        # Inválido: DV errado
-        with self.assertRaises(ValueError):
-            CPF("12345678900")
 
     def test_cpf_valido_com_mascara(self):
         cpf = CPF("123.456.789-09")
@@ -174,13 +162,15 @@ class TestEnderecoBrasil(TestCase):
 
 class TestCodigoValidavel(TestCase):
     def test_codigo_validavel_basic_validation_with_none_empty_and_nondigit_input(self):
-        # Covering line 69: if code is None: return None
-        cv = CodigoValidavel.__new__(CodigoValidavel)
-        self.assertIsNone(cv._basic_digits_validation(None))
+        # Validate behavior through public APIs (no private method calls)
+        cpf_none = CPF(None)
+        self.assertIsNone(cpf_none.digitos)
 
-        # Covering line 75: if value is None or value.strip() == '': return None
-        self.assertIsNone(cv._basic_digits_validation(""))
-        self.assertIsNone(cv._basic_digits_validation("abc"))
+        with self.assertRaises(ValueError):
+            CPF("")
+
+        with self.assertRaises(ValueError):
+            CPF("abc")
 
     def test_codigo_validavel_full_digits_default(self):
         # Validate default digit handling through observable behavior
