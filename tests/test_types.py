@@ -87,7 +87,7 @@ class TestCNES(TestCase):
 
 
 class TestCNS(TestCase):
-    def test_cns_valid(self):
+    def test_cns_valido(self):
         cns = CNS("123456789012345")
         self.assertEqual(cns.digitos, "123456789012345")
         self.assertEqual(str(cns), "123456789012345")
