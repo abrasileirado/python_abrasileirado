@@ -122,7 +122,7 @@ class TestCEP(TestCase):
 
 
 class TestCNPJ(TestCase):
-    def test_cnpj_valid(self):
+    def test_cnpj_valido(self):
         # CNPJ válido: 12.345.678/9000-05
         cnpj = CNPJ("12345678900005")
         self.assertEqual(cnpj.digitos, "12345678900005")
