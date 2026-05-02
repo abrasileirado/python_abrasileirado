@@ -135,7 +135,7 @@ class TestCNPJ(TestCase):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNPJ("11111111111111")
-        # Inválido: menos de 3 dígitos
+        # Inválido: menos de 14 dígitos
         with self.assertRaises(ValueError):
             CNPJ("1")
         # Inválido: DV errado
