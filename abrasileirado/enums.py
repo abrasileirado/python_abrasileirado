@@ -490,7 +490,8 @@ class NaturezaJuridicaEnum(IterableEnum):
         "Serviço Social Autônomo",
         GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilício", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIO = ("3085", "Condomínio Edilício", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIOS = CONDOMINIO_EDILICIO
     UNIDADE_EXECUTORA = (
         "3093",
         "Unidade Executora (Programa Dinheiro Direto na Escola)",
