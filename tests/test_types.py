@@ -120,6 +120,8 @@ class TestCNPJ(TestCase):
         cnpj2 = CNPJ("12.345.678/9000-05")
         self.assertEqual(cnpj2.digitos, "12345678900005")
         self.assertEqual(str(cnpj2), "12.345.678/9000-05")
+
+    def test_cnpj_invalid(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNPJ("11111111111111")
