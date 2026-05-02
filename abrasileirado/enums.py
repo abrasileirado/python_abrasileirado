@@ -217,14 +217,14 @@ class RegiaoStrEnum(IterableEnum):
     SUDESTE = ("SE", "Sudeste")
     SUL = ("S", "Sul")
     CENTRO_OESTE = ("CO", "Centro-oeste")
-    NAO_DECLARADO = ("N", "Não declarado")
+    NAO_DECLARADO = ("ND", "Não declarado")
     __choices__ = [
         ("N", "Norte"),
         ("NE", "Nordeste"),
         ("SE", "Sudeste"),
         ("S", "Sul"),
         ("CO", "Centro-oeste"),
-        ("N", "Não declarado"),
+        ("ND", "Não declarado"),
     ]
 
     @property
@@ -490,7 +490,7 @@ class NaturezaJuridicaEnum(IterableEnum):
         "Serviço Social Autônomo",
         GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilícios", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilício", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
     UNIDADE_EXECUTORA = (
         "3093",
         "Unidade Executora (Programa Dinheiro Direto na Escola)",
