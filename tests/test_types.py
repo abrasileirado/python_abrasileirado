@@ -87,9 +87,13 @@ class TestCNS(TestCase):
         cns = CNS("123456789012345")
         self.assertEqual(cns.digitos, "123456789012345")
         self.assertEqual(str(cns), "123456789012345")
+
+    def test_cns_invalido_tamanho(self):
         # Inválido: menos de 3 dígitos
         with self.assertRaises(ValueError):
             CNS("12")
+
+    def test_cns_invalido_digitos_iguais(self):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNS("111111111111111")
