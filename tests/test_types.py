@@ -1,7 +1,24 @@
 from unittest import TestCase
 
 from abrasileirado.enums import UnidadeFederativaStrEnum
-from abrasileirado.types import CEP, CNES, CNPJ, CNS, CPF, NUP, CodigoValidavel, EnderecoBrasil
+from abrasileirado.types import (
+    CEP,
+    CNES,
+    CNJ,
+    CNPJ,
+    CNS,
+    CPF,
+    NUP,
+    PIS,
+    RENAVAM,
+    Certidao,
+    CodigoValidavel,
+    EnderecoBrasil,
+    Passaporte,
+    PlacaVeicular,
+    Telefone,
+    TituloEleitoral,
+)
 
 
 class TestCPF(TestCase):
@@ -183,3 +200,14 @@ class TestNUPExtra(TestCase):
     def test_nup_invalido_tamanho_maior(self):
         with self.assertRaises(ValueError):
             NUP("123456789012345678")  # Mais de 17 dígitos
+
+
+class TestCPFDerivedMasks(TestCase):
+    def test_cpf_derived_codes_use_grouped_mask(self):
+        classes = (PIS, RENAVAM, TituloEleitoral, CNJ, Telefone, Passaporte, PlacaVeicular, Certidao)
+
+        for code_class in classes:
+            with self.subTest(code_class=code_class.__name__):
+                code = code_class("12345678909")
+                self.assertEqual(code.digitos, "12345678909")
+                self.assertEqual(str(code), "123 456 789 09")
