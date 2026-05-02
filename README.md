@@ -1,6 +1,6 @@
 # Python BRfied
 
-![License](https://img.shields.io/badge/License-MIT-lemon.svg)]
+![License](https://img.shields.io/badge/License-MIT-lemon.svg)
 [![Python](https://img.shields.io/pypi/pyversions/abrasileirado.svg)](https://pypi.org/project/abrasileirado/)
 [![QA](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/qa.yml/badge.svg)](https://github.com/abrasileirado/python_abrasileirado/actions/workflows/qa.yml)
 [![Coverage](https://codecov.io/gh/abrasileirado/python_abrasileirado/branch/main/graph/badge.svg)](https://codecov.io/gh/abrasileirado/python_abrasileirado)
