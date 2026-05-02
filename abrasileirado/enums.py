@@ -78,21 +78,19 @@ class IterableEnum(Enum):
                 print(CorEnum.as_choices())
                 # Output: [(16711680, '16711680'), (65280, '65280'), (255, '255')]
         """
-        if choices := getattr(cls, "__choices__", None):
-            return choices.copy()
         return [(x.value, x.description) for x in cls]
 
 
 class SimNaoEnum(IterableEnum):
     SIM = (1, "Sim")
     NAO = (2, "Não")
-    NAO_INFORMADO = (9, "Não informado")
+    NAO_INFORMADO = (9, "Não declarado")
 
 
 class SimNaoStrEnum(IterableEnum):
     SIM = ("S", "Sim")
     NAO = ("N", "Não")
-    NAO_INFORMADO = ("I", "Não informado")
+    NAO_INFORMADO = ("ND", "Não declarado")
 
 
 class EstadoCivilEnum(IterableEnum):
@@ -106,7 +104,7 @@ class EstadoCivilEnum(IterableEnum):
     DIVORCIADO = (4, "Divorciado(a)")
     SEPARADO = (5, "Separado(a) judicialmente")
     DESQUITADO = (6, "Desquitado")
-    NAO_INFORMADO = (99, "Não informado")
+    NAO_INFORMADO = (99, "Não declarado")
 
 
 class CorRacaEnum(IterableEnum):
@@ -119,7 +117,7 @@ class CorRacaEnum(IterableEnum):
     PARDA = (3, "Parda")
     AMARELA = (4, "Amarela")
     INDIGENA = (5, "Indígena")
-    NAO_INFORMADA = (99, "Não informada")
+    NAO_INFORMADA = (99, "Não declarada")
 
 
 class SexoEnum(IterableEnum):
@@ -129,7 +127,7 @@ class SexoEnum(IterableEnum):
 
     MASCULINO = (1, "Masculino")
     FEMININO = (2, "Feminino")
-    NAO_INFORMADO = (9, "Não informado")
+    NAO_INFORMADO = (9, "Não declarado")
 
 
 class SexoStrEnum(IterableEnum):
@@ -137,7 +135,7 @@ class SexoStrEnum(IterableEnum):
 
     MASCULINO = ("M", "Masculino")
     FEMININO = ("F", "Feminino")
-    NAO_INFORMADO = ("N", "Não informado")
+    NAO_INFORMADO = ("ND", "Não declarado")
 
 
 class GeneroEnum(IterableEnum):
@@ -152,7 +150,7 @@ class GeneroEnum(IterableEnum):
     TRAVESTI = (5, "Travesti")
     NAO_BINARIO = (6, "Não binário")
     OUTRO = (7, "Outro")
-    NAO_INFORMADO = (99, "Não informado")
+    NAO_INFORMADO = (99, "Não declarado")
 
 
 class DeficienciaEnum(IterableEnum):
@@ -165,7 +163,7 @@ class DeficienciaEnum(IterableEnum):
     MOBILIDADE = (3, "Mobilidade")
     COGNICAO_COMUNICACAO = (4, "Cognição/comunicação")
     AUTOCUIDADO = (5, "Autocuidado")
-    NAO_DECLARADO = (9, "Não declarado")
+    NAO_DECLARADO = (9, "Não declarada")
 
 
 class ZonaHabitacaoEnum(IterableEnum):
@@ -176,7 +174,7 @@ class ZonaHabitacaoEnum(IterableEnum):
     URBANA = (1, "Urbana")
     RURAL = (2, "Rural")
     TRANSICAO = (3, "Área de transição")
-    NAO_INFORMADA = (9, "Não informada")
+    NAO_INFORMADA = (9, "Não declarada")
 
 
 class ZonaHabitacaoStrEnum(IterableEnum):
@@ -187,7 +185,7 @@ class ZonaHabitacaoStrEnum(IterableEnum):
     URBANA = ("U", "Urbana")
     RURAL = ("R", "Rural")
     TRANSICAO = ("T", "Área de transição")
-    NAO_INFORMADA = ("N", "Não informada")
+    NAO_INFORMADA = ("ND", "Não declarada")
 
 
 class RegiaoEnum(IterableEnum):
@@ -200,7 +198,7 @@ class RegiaoEnum(IterableEnum):
     SUDESTE = (3, "Sudeste")
     SUL = (4, "Sul")
     CENTRO_OESTE = (5, "Centro-oeste")
-    NAO_DECLARADO = (9, "Não declarado")
+    NAO_DECLARADO = (9, "Não declarada")
 
     @property
     def ufs(self) -> list["UnidadeFederativaEnum"]:
@@ -217,15 +215,7 @@ class RegiaoStrEnum(IterableEnum):
     SUDESTE = ("SE", "Sudeste")
     SUL = ("S", "Sul")
     CENTRO_OESTE = ("CO", "Centro-oeste")
-    NAO_DECLARADO = ("ND", "Não declarado")
-    __choices__ = [
-        ("N", "Norte"),
-        ("NE", "Nordeste"),
-        ("SE", "Sudeste"),
-        ("S", "Sul"),
-        ("CO", "Centro-oeste"),
-        ("ND", "Não declarado"),
-    ]
+    NAO_DECLARADO = ("ND", "Não declarada")
 
     @property
     def ufs(self) -> list["UnidadeFederativaStrEnum"]:

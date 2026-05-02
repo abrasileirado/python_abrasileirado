@@ -173,10 +173,20 @@ class TestEnderecoBrasil(TestCase):
 
 
 class TestCodigoValidavel(TestCase):
+    def test_codigo_validavel_base_mask_and_str(self):
+        class CodigoSempreValido(CodigoValidavel):
+            def _is_valid(self, code: str) -> bool:
+                return True
+
+        codigo = CodigoSempreValido("1")
+
+        self.assertEqual(codigo.digitos, "1")
+        self.assertEqual(str(codigo), "1")
+
     def test_codigo_validavel_basic_validation_with_none_empty_and_nondigit_input(self):
         # Validate behavior through public APIs (no private method calls)
-        cpf_none = CPF(None)
-        self.assertIsNone(cpf_none.digitos)
+        with self.assertRaises(ValueError):
+            CPF(None)
 
         with self.assertRaises(ValueError):
             CPF("")
