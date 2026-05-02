@@ -93,7 +93,7 @@ class TestCNS(TestCase):
         self.assertEqual(str(cns), "123456789012345")
 
     def test_cns_invalido_tamanho(self):
-        # Inválido: menos de 3 dígitos
+        # Inválido: menos de 15 dígitos
         with self.assertRaises(ValueError):
             CNS("12")
 
@@ -113,7 +113,7 @@ class TestCEP(TestCase):
         self.assertEqual(str(cep2), "12345-678")
 
     def test_cep_invalid(self):
-        # Inválido: menos de 3 dígitos
+        # Inválido: menos de 8 dígitos
         with self.assertRaises(ValueError):
             CEP("12")
         # Inválido: todos dígitos iguais
@@ -135,7 +135,7 @@ class TestCNPJ(TestCase):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CNPJ("11111111111111")
-        # Inválido: menos de 3 dígitos
+        # Inválido: menos de 14 dígitos
         with self.assertRaises(ValueError):
             CNPJ("1")
         # Inválido: DV errado
