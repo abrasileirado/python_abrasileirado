@@ -27,6 +27,24 @@ class TestCPF(TestCase):
         self.assertEqual(str(cpf), "123.456.789-09")
         self.assertEqual(cpf.digitos, "12345678909")
 
+    def test_cpf_valid(self):
+        # CPF válido: 000.000.001-91
+        cpf = CPF("00000000191")
+        self.assertEqual(cpf.digitos, "00000000191")
+        self.assertEqual(str(cpf), "000.000.001-91")
+        cpf2 = CPF("000.000.001-91")
+        self.assertEqual(cpf2.digitos, "00000000191")
+        self.assertEqual(str(cpf2), "000.000.001-91")
+        # Inválido: todos dígitos iguais
+        with self.assertRaises(ValueError):
+            CPF("11111111111")
+        # Inválido: menos de 3 dígitos
+        with self.assertRaises(ValueError):
+            CPF("1")
+        # Inválido: DV errado
+        with self.assertRaises(ValueError):
+            CPF("12345678900")
+
     def test_cpf_valido_com_mascara(self):
         cpf = CPF("123.456.789-09")
         self.assertEqual(str(cpf), "123.456.789-09")
@@ -103,24 +121,6 @@ class TestCEP(TestCase):
         # Inválido: todos dígitos iguais
         with self.assertRaises(ValueError):
             CEP("11111111")
-
-    def test_cpf_valid(self):
-        # CPF válido: 000.000.001-91
-        cpf = CPF("00000000191")
-        self.assertEqual(cpf.digitos, "00000000191")
-        self.assertEqual(str(cpf), "000.000.001-91")
-        cpf2 = CPF("000.000.001-91")
-        self.assertEqual(cpf2.digitos, "00000000191")
-        self.assertEqual(str(cpf2), "000.000.001-91")
-        # Inválido: todos dígitos iguais
-        with self.assertRaises(ValueError):
-            CPF("11111111111")
-        # Inválido: menos de 3 dígitos
-        with self.assertRaises(ValueError):
-            CPF("1")
-        # Inválido: DV errado
-        with self.assertRaises(ValueError):
-            CPF("12345678900")
 
 
 class TestCNPJ(TestCase):
@@ -204,10 +204,19 @@ class TestNUPExtra(TestCase):
 
 class TestCPFDerivedMasks(TestCase):
     def test_cpf_derived_codes_use_grouped_mask(self):
-        classes = (PIS, RENAVAM, TituloEleitoral, CNJ, Telefone, Passaporte, PlacaVeicular, Certidao)
+        expected_formats = {
+            PIS: "123 456 789 09",
+            RENAVAM: "123 456 789 09",
+            TituloEleitoral: "123 456 789 09",
+            CNJ: "123 456 789 09",
+            Telefone: "123 456 789 09",
+            Passaporte: "123 456 789 09",
+            PlacaVeicular: "123 456 789 09",
+            Certidao: "123 456 789 09",
+        }
 
-        for code_class in classes:
+        for code_class, expected_mask in expected_formats.items():
             with self.subTest(code_class=code_class.__name__):
                 code = code_class("12345678909")
                 self.assertEqual(code.digitos, "12345678909")
-                self.assertEqual(str(code), "123 456 789 09")
+                self.assertEqual(str(code), expected_mask)
