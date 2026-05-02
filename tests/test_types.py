@@ -173,7 +173,7 @@ class TestEnderecoBrasil(TestCase):
 
 
 class TestCodigoValidavel(TestCase):
-    def test_codigo_validavel_basic_validation_missing_coverage(self):
+    def test_codigo_validavel_basic_validation_with_none_empty_and_nondigit_input(self):
         # Covering line 69: if code is None: return None
         cv = CodigoValidavel.__new__(CodigoValidavel)
         self.assertIsNone(cv._basic_digits_validation(None))
@@ -183,9 +183,10 @@ class TestCodigoValidavel(TestCase):
         self.assertIsNone(cv._basic_digits_validation("abc"))
 
     def test_codigo_validavel_full_digits_default(self):
-        # Covering line 30: return 1 in _full_digits
-        cv = CodigoValidavel.__new__(CodigoValidavel)
-        self.assertEqual(cv._full_digits, 1)
+        # Validate default digit handling through observable behavior
+        cpf = CPF("12345678909")
+        self.assertEqual(cpf.digitos, "12345678909")
+        self.assertEqual(str(cpf), "123.456.789-09")
 
 
 class TestCEPInvalid(TestCase):
