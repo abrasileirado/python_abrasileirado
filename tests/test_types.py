@@ -173,7 +173,7 @@ class TestEnderecoBrasil(TestCase):
 
 
 class TestCodigoValidavel(TestCase):
-    def test_codigo_validavel_basic_validation_missing_coverage(self):
+    def test_codigo_validavel_basic_validation_with_none_empty_and_nondigit_input(self):
         # Covering line 69: if code is None: return None
         cv = CodigoValidavel.__new__(CodigoValidavel)
         self.assertIsNone(cv._basic_digits_validation(None))
