@@ -88,9 +88,9 @@ class TestCNES(TestCase):
 
 class TestCNS(TestCase):
     def test_cns_valido(self):
-        cns = CNS("123456789012345")
-        self.assertEqual(cns.digitos, "123456789012345")
-        self.assertEqual(str(cns), "123456789012345")
+        cns = CNS("898001160444648")
+        self.assertEqual(cns.digitos, "898001160444648")
+        self.assertEqual(str(cns), "898001160444648")
 
     def test_cns_invalido_tamanho(self):
         # Inválido: menos de 15 dígitos
