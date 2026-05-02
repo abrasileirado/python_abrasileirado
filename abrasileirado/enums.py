@@ -43,7 +43,7 @@ class IterableEnum(Enum):
         self._value_ = value
 
     @classmethod
-    def as_choices(cls) -> tuple[Any, str]:
+    def as_choices(cls) -> list[tuple[Any, str]]:
         """Retorna uma lista de tuplas contendo o valor e a descrição de cada membro do enum.
         A descrição é obtida a partir do atributo 'description' de cada membro, se existir, ou do valor do membro
         caso contrário.
@@ -78,6 +78,8 @@ class IterableEnum(Enum):
                 print(CorEnum.as_choices())
                 # Output: [(16711680, '16711680'), (65280, '65280'), (255, '255')]
         """
+        if choices := getattr(cls, "__choices__", None):
+            return choices.copy()
         return [(x.value, getattr(x, "description", str(x))) for x in cls]
 
 
@@ -216,6 +218,14 @@ class RegiaoStrEnum(IterableEnum):
     SUL = ("S", "Sul")
     CENTRO_OESTE = ("CO", "Centro-oeste")
     NAO_DECLARADO = ("N", "Não declarado")
+    __choices__ = [
+        ("N", "Norte"),
+        ("NE", "Nordeste"),
+        ("SE", "Sudeste"),
+        ("S", "Sul"),
+        ("CO", "Centro-oeste"),
+        ("N", "Não declarado"),
+    ]
 
     @property
     def ufs(self) -> list["UnidadeFederativaStrEnum"]:
