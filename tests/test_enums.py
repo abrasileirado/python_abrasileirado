@@ -36,9 +36,11 @@ class TestIterableEnum(TestCase):
             VERMELHO = (1, "Vermelho")
             VERDE = (2, "Verde")
 
+        CorEnum.__choices__ = [(1, "vermelho"), (2, "verde")]
         choices = CorEnum.as_choices()
 
         self.assertEqual(choices, [(1, "vermelho"), (2, "verde")])
+        self.assertIsNot(choices, CorEnum.__choices__)
 
 
 class TestEnumChoices(TestCase):
