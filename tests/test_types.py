@@ -27,7 +27,7 @@ class TestCPF(TestCase):
         self.assertEqual(str(cpf), "123.456.789-09")
         self.assertEqual(cpf.digitos, "12345678909")
 
-    def test_cpf_valid(self):
+    def test_cpf_valido_leading_zeros(self):
         # CPF válido sem máscara (caso distinto de test_cpf_valido)
         cpf = CPF("00000000191")
         self.assertEqual(cpf.digitos, "00000000191")
