@@ -104,7 +104,7 @@ class TestCNS(TestCase):
 
 
 class TestCEP(TestCase):
-    def test_cep_valid(self):
+    def test_cep_valido(self):
         cep = CEP("12345678")
         self.assertEqual(cep.digitos, "12345678")
         self.assertEqual(str(cep), "12345-678")
