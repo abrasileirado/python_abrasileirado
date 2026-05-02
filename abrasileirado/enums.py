@@ -105,7 +105,7 @@ class EstadoCivilEnum(IterableEnum):
     VIUVO = (3, "Viúvo(a)")
     DIVORCIADO = (4, "Divorciado(a)")
     SEPARADO = (5, "Separado(a) judicialmente")
-    UNIAO_ESTAVEL = (6, "Desquitado")
+    DESQUITADO = (6, "Desquitado")
     NAO_INFORMADO = (99, "Não informado")
 
 
@@ -490,7 +490,8 @@ class NaturezaJuridicaEnum(IterableEnum):
         "Serviço Social Autônomo",
         GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS,
     )
-    CONDOMINIO_EDILICIOS = ("3085", "Condomínio Edilício", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIO = ("3085", "Condomínio Edilício", GrupoNaturezaJuridicaEnum.ENTIDADES_SEM_FINS_LUCRATIVOS)
+    CONDOMINIO_EDILICIOS = CONDOMINIO_EDILICIO
     UNIDADE_EXECUTORA = (
         "3093",
         "Unidade Executora (Programa Dinheiro Direto na Escola)",
