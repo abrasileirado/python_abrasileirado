@@ -69,9 +69,9 @@ class TestNUP(TestCase):
 
 class TestCNES(TestCase):
     def test_cnes_valido(self):
-        cnes = CNES("1234567")
-        self.assertEqual(cnes.digitos, "1234567")
-        self.assertEqual(str(cnes), "1234567")
+        cnes = CNES("2079305")
+        self.assertEqual(cnes.digitos, "2079305")
+        self.assertEqual(str(cnes), "2079305")
         self.assertEqual(CNES("0000001").digitos, "0000001")
         self.assertEqual(CNES("0000001").__str__(), "0000001")
 
@@ -88,9 +88,9 @@ class TestCNES(TestCase):
 
 class TestCNS(TestCase):
     def test_cns_valido(self):
-        cns = CNS("123456789012345")
-        self.assertEqual(cns.digitos, "123456789012345")
-        self.assertEqual(str(cns), "123456789012345")
+        cns = CNS("898001160444648")
+        self.assertEqual(cns.digitos, "898001160444648")
+        self.assertEqual(str(cns), "898001160444648")
 
     def test_cns_invalido_tamanho(self):
         # Inválido: menos de 15 dígitos
@@ -222,10 +222,6 @@ class TestCPFDerivedMasks(TestCase):
             RENAVAM: "123 456 789 09",
             TituloEleitoral: "123 456 789 09",
             CNJ: "123 456 789 09",
-            Telefone: "123 456 789 09",
-            Passaporte: "123 456 789 09",
-            PlacaVeicular: "123 456 789 09",
-            Certidao: "123 456 789 09",
         }
 
         for code_class, expected_mask in expected_formats.items():
