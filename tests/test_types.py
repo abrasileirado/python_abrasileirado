@@ -69,9 +69,9 @@ class TestNUP(TestCase):
 
 class TestCNES(TestCase):
     def test_cnes_valido(self):
-        cnes = CNES("1234567")
-        self.assertEqual(cnes.digitos, "1234567")
-        self.assertEqual(str(cnes), "1234567")
+        cnes = CNES("2079305")
+        self.assertEqual(cnes.digitos, "2079305")
+        self.assertEqual(str(cnes), "2079305")
         self.assertEqual(CNES("0000001").digitos, "0000001")
         self.assertEqual(CNES("0000001").__str__(), "0000001")
 
