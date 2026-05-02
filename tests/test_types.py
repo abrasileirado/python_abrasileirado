@@ -222,6 +222,10 @@ class TestCPFDerivedMasks(TestCase):
             RENAVAM: "123 456 789 09",
             TituloEleitoral: "123 456 789 09",
             CNJ: "123 456 789 09",
+            Telefone: "123 456 789 09",
+            Passaporte: "123 456 789 09",
+            PlacaVeicular: "123 456 789 09",
+            Certidao: "123 456 789 09",
         }
 
         for code_class, expected_mask in expected_formats.items():
