@@ -217,14 +217,14 @@ class RegiaoStrEnum(IterableEnum):
     SUDESTE = ("SE", "Sudeste")
     SUL = ("S", "Sul")
     CENTRO_OESTE = ("CO", "Centro-oeste")
-    NAO_DECLARADO = ("N", "Não declarado")
+    NAO_DECLARADO = ("ND", "Não declarado")
     __choices__ = [
         ("N", "Norte"),
         ("NE", "Nordeste"),
         ("SE", "Sudeste"),
         ("S", "Sul"),
         ("CO", "Centro-oeste"),
-        ("N", "Não declarado"),
+        ("ND", "Não declarado"),
     ]
 
     @property
