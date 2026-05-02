@@ -29,7 +29,7 @@ class TestIterableEnum:
 
 
 @pytest.mark.parametrize("enum_cls, expected", [
-    (enums.SimNaoIntEnum, [(1, "Sim"), (2, "Não"), (9, "Não informado")]),
+    (enums.SimNaoEnum, [(1, "Sim"), (2, "Não"), (9, "Não informado")]),
     (enums.SimNaoStrEnum, [("S", "Sim"), ("N", "Não"), ("I", "Não informado")]),
     (enums.EstadoCivilEnum, [
         (1, "Solteiro(a)"), (2, "Casado(a)"), (3, "Viúvo(a)"), (4, "Divorciado(a)"),
@@ -45,7 +45,7 @@ class TestIterableEnum:
         (1, "Visão"), (2, "Audição"), (3, "Mobilidade"), (4, "Cognição/comunicação"), (5, "Autocuidado"), (9, "Não declarado")]),
     (enums.ZonaHabitacaoEnum, [(1, "Urbana"), (2, "Rural"), (3, "Área de transição"), (9, "Não informada")]),
     (enums.ZonaHabitacaoStrEnum, [("U", "Urbana"), ("R", "Rural"), ("T", "Área de transição"), ("N", "Não informada")]),
-    (enums.RegiaoIntEnum, [
+    (enums.RegiaoEnum, [
         (1, "Norte"), (2, "Nordeste"), (3, "Sudeste"), (4, "Sul"), (5, "Centro-oeste"), (9, "Não declarado")]),
     (enums.RegiaoStrEnum, [
         ("N", "Norte"), ("NE", "Nordeste"), ("SE", "Sudeste"), ("S", "Sul"), ("CO", "Centro-oeste"), ("N", "Não declarado")]),
@@ -54,10 +54,10 @@ def test_as_choices_parametrized(enum_cls, expected):
     assert enum_cls.as_choices() == expected
 
 def test_unidade_federativa_int_enum():
-    uf = enums.UnidadeFederativaIntEnum.SP
+    uf = enums.UnidadeFederativaEnum.SP
     assert uf.value == 35
     assert uf.description == "São Paulo"
-    assert uf.region == enums.RegiaoIntEnum.SUDESTE
+    assert uf.region == enums.RegiaoEnum.SUDESTE
 
 def test_unidade_federativa_str_enum():
     uf = enums.UnidadeFederativaStrEnum.SP
@@ -68,7 +68,7 @@ def test_unidade_federativa_str_enum():
 
 def test_regiao_ufs():
     # Testa se todas as UFs de uma região pertencem àquela região
-    for regiao in enums.RegiaoIntEnum:
+    for regiao in enums.RegiaoEnum:
         for uf in regiao.ufs:
             assert uf.region == regiao
     for regiao in enums.RegiaoStrEnum:

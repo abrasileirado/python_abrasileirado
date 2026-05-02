@@ -44,30 +44,44 @@ Python library specific brazilian objects and validations.
 Compare with others packages
 ----------------------------
 
-There are several Python packages for Brazilian data validation and utilities. Here’s how **abrasileirado** compares to some popular alternatives:
+There are several Python packages for Brazilian data validation and utilities. 
+Here’s how **abrasileirado** compares to some popular alternatives:
 
-====================  ==================  ==================  ==================  ==================
-Feature               abrasileirado       validate-docbr      pycpfcnpj           brutils
-====================  ==================  ==================  ==================  ==================
-CPF validation        Yes                 Yes                 Yes                 Yes
-CNPJ validation       Yes                 Yes                 Yes                 Yes
-Other docs (RG, CNH)  Yes                 Yes                 No                  Yes
-Enums/types           Yes                 No                  No                  No
-Typed objects         Yes                 No                  No                  No
-Date/time support     Yes                 No                  No                  No
-File parsing          Yes                 No                  No                  No
-Serialization         Yes                 No                  No                  No
-Test coverage         100%                Unknown             Unknown             Unknown
-Python 3.10+          Yes                 Yes                 Yes                 Yes
-====================  ==================  ==================  ==================  ==================
+=============================== ============= ============== ========= =======
+Feature                         abrasileirado validate-docbr pycpfcnpj brutils
+=============================== ============= ============== ========= =======
+Test coverage                   100%          Unknown        Unknown   99%
+Python 3.10+                    ✅            ✅            ✅        ✅
+Immutable typed objects         ✅            🚫            🚫        🚫
+CPF validation                  ✅            ✅            ✅        ✅
+CNPJ validation                 ✅            ✅            ✅        ✅
+CNH validation                  ✅            ✅            🚫        ✅
+CNS validation                  ✅            ✅            🚫        ✅
+CNES validation                 ✅            ✅            🚫        ✅
+PIS validation                  ✅            ✅            🚫        ✅
+RENAVAM validation              ✅            ✅            🚫        ✅
+Titulo eleitoral validation     ✅            ✅            🚫        ✅
+CNJ validation                  ✅            🚫            🚫        🚫
+NUP validation                  ✅            🚫            🚫        🚫
+Telefone validation             ✅            🚫            🚫        🚫
+Passaporte validation           ✅            🚫            🚫        🚫
+Placa veicular validation       ✅            🚫            🚫        🚫
+Certidão validation             🚫            ✅            🚫        🚫
+Sim/Não enum                    ✅            🚫            🚫        🚫
+Estado civil enum               ✅            🚫            🚫        🚫
+Cor/raça enum                   ✅            🚫            🚫        🚫
+Sexo enum                       ✅            🚫            🚫        🚫
+Gênero enum                     ✅            🚫            🚫        🚫
+Deficiência enum                ✅            🚫            🚫        🚫
+Zona de habitação enum          ✅            🚫            🚫        🚫
+Região geopolítica enum         ✅            🚫            🚫        🚫
+Unidade federativa enum         ✅            🚫            🚫        🚫
+Grupo de natureza jurídica enum ✅            🚫            🚫        🚫
+Natureza jurídica enum          ✅            🚫            🚫        🚫
+=============================== ============= ============== ========= =======
 
-**abrasileirado** focuses on typed objects, enums, and validations for Brazilian-specific data, while others are more focused on document validation only.
-
-Features
---------
-
-- Typed objects for CPF, CNPJ, RG, CNH, and Brazilian addresses.
-- Enums for Brazilian states, genders, and zones of habitation.
+**abrasileirado** focuses on typed objects, enums, and validations for Brazilian-specific data, while 
+others are more focused on document validation only.
 
 Installation
 ------------

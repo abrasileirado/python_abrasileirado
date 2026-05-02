@@ -1,5 +1,9 @@
 import pytest
-from abrasileirado.types import CPF, NUP
+
+from abrasileirado.types import EnderecoBrasil
+from abrasileirado.types import CodigoValidavel, CNES, CNS, CEP, CPF, CNPJ, NUP
+from abrasileirado.enums import UnidadeFederativaStrEnum
+
 
 def test_cpf_valido():
     cpf = CPF("12345678909")
@@ -36,11 +40,6 @@ def test_nup_invalido_dv():
 def test_nup_invalido_tamanho():
     with pytest.raises(ValueError):
         NUP("1234567890123456")
-import pytest
-from abrasileirado.types import CNES, CNS, CEP, CPF, CNPJ, EnderecoBrasil
-from abrasileirado.enums import UnidadeFederativaStrEnum
-from abrasileirado.types import CodigoValidavel
-
 
 def test_cnes_valid():
     cnes = CNES('1234567')
@@ -163,3 +162,29 @@ def test_cep_invalid_length_beyond_full_digits():
     # CodigoValidavel.__init__ calls self._is_valid
     with pytest.raises(ValueError):
         CEP("123456789")
+
+
+class TestNUP:
+    def test_nup_valido(self):
+        # Exemplo real de NUP válido: 23520005177202676
+        # Base: 2352000517720267, DV: 6 (98 - (base % 97))
+        nup = NUP("23520005177202676")
+        assert str(nup) == "23520.005177/2026-76"
+        assert nup.digitos == "23520005177202676"
+
+    def test_nup_valido_com_mascara(self):
+        nup = NUP("23520.005177/2026-76")
+        assert str(nup) == "23520.005177/2026-76"
+        assert nup.digitos == "23520005177202676"
+
+    def test_nup_invalido_dv(self):
+        with pytest.raises(ValueError):
+            NUP("23520005177202677")  # DV incorreto
+
+    def test_nup_invalido_tamanho(self):
+        with pytest.raises(ValueError):
+            NUP("1234567890123456")  # Menos de 17 dígitos
+
+    def test_nup_invalido_tamanho_maior(self):
+        with pytest.raises(ValueError):
+            NUP("123456789012345678")  # Mais de 17 dígitos
