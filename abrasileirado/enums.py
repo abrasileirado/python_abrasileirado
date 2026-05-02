@@ -105,7 +105,7 @@ class EstadoCivilEnum(IterableEnum):
     VIUVO = (3, "Viúvo(a)")
     DIVORCIADO = (4, "Divorciado(a)")
     SEPARADO = (5, "Separado(a) judicialmente")
-    UNIAO_ESTAVEL = (6, "Desquitado")
+    DESQUITADO = (6, "Desquitado")
     NAO_INFORMADO = (99, "Não informado")
 
 
