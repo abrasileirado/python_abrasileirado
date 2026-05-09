@@ -25,7 +25,7 @@ class CodigoValidavel:
         if not self._is_valid(code):
             classname = self.__class__.__name__
             raise ValueError(f"{classname} inválido.")
-        self.__clean_code: str = self._only_digits(code).zfill(self._full_digits)
+        self.__clean_code: str = self._normalize(code).zfill(self._full_digits)
         self.__masked_code: str = self._mask_code(code)
 
     @property
@@ -57,7 +57,7 @@ class CodigoValidavel:
             return False
         return True
 
-    def _only_digits(self, code: str) -> str:
+    def _normalize(self, code: str) -> str:
         """Retorna apenas os dígitos do código, sem máscara."""
         return "".join(c for c in filter(str.isdigit, code))
 
@@ -71,7 +71,7 @@ class CodigoValidavel:
         Returns:
             str: O código formatado com máscara.
         """
-        return self._only_digits(code).zfill(self._full_digits)
+        return self._normalize(code).zfill(self._full_digits)
 
     def _basic_digits_validation(self, code: str) -> str | None:
         """Realiza validações básicas comuns a códigos numéricos, como quantidade de dígitos, não aceitar todos os
@@ -88,7 +88,7 @@ class CodigoValidavel:
         if code is None:
             return None
 
-        value = self._only_digits(code)
+        value = self._normalize(code)
 
         # Não informou ou informou uma string vazia
         if value is None or value.strip() == "":
@@ -142,7 +142,7 @@ class CEP(CodigoValidavel):
     REGEX = r"^\d{5}-\d{3}$"
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code)
+        digits = self._normalize(code)
         return f"{digits[:5]}-{digits[5:]}"
 
 
@@ -303,7 +303,7 @@ class CPF(CodigoValidavel):
         return 11
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return f"{digits[:3]}.{digits[3:6]}.{digits[6:9]}-{digits[9:]}"
 
     def _is_valid(self, code: str) -> bool:
@@ -339,30 +339,74 @@ class CNPJ(CodigoValidavel):
         print(cnpj2)  # Saída: 12.345.678/9000-05
     """
 
-    MASK = "99.999.999/9999-00"
-    REGEX = re.compile(r"^(\d{2})[.-]?(\d{3})[.-]?(\d{3})/(\d{4})-(\d{2})$")
+    MASK = "AA.AAA.AAA/AAAA-00"
+    REGEX = re.compile(
+        r"^([A-Z0-9]{2})[.]?([A-Z0-9]{3})[.]?([A-Z0-9]{3})/([A-Z0-9]{4})-?(\d{2})$",
+        re.IGNORECASE,
+    )
 
     @property
     def _full_digits(self) -> int:
         return 14
 
+    def _normalize(self, code: str) -> str:
+        return "".join(c for c in (code or "").upper() if c.isalnum())
+
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
-        return f"{digits[:2]}.{digits[2:5]}.{digits[5:8]}/{digits[8:12]}-{digits[12:]}"
+        value = self._normalize(code).zfill(self._full_digits)
+        return f"{value[:2]}.{value[2:5]}.{value[5:8]}/{value[8:12]}-{value[12:]}"
+
+    def _basic_cnpj_validation(self, code: str) -> str | None:
+        value = self._normalize(code)
+
+        if not value:
+            return None
+
+        if len(value) != self._full_digits:
+            return None
+
+        dv = value[12:]
+
+        if not dv.isdigit():
+            return None
+
+        # Mantém a proteção contra sequências repetidas no caso puramente numérico.
+        if value.isdigit() and value == value[0] * self._full_digits:
+            return None
+
+        return value
+
+    @staticmethod
+    def _char_value(char: str) -> int:
+        return ord(char) - 48
+
+    @classmethod
+    def _calculate_dvs(cls, base: str) -> str:
+        weights1 = (5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
+        weights2 = (6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
+
+        values = [cls._char_value(c) for c in base]
+
+        total1 = sum(v * w for v, w in zip(values, weights1))
+        rest1 = total1 % 11
+        dv1 = 0 if rest1 in (0, 1) else 11 - rest1
+
+        values2 = values + [dv1]
+        total2 = sum(v * w for v, w in zip(values2, weights2))
+        rest2 = total2 % 11
+        dv2 = 0 if rest2 in (0, 1) else 11 - rest2
+
+        return f"{dv1}{dv2}"
 
     def _is_valid(self, code: str) -> bool:
-        value = self._basic_digits_validation(code)
+        value = self._basic_cnpj_validation(code)
         if not value:
             return False
-        v = value.zfill(self._full_digits)
-        c1 = (5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
-        c2 = (6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
-        dv1 = sum([int(v[i]) * c1[i] for i in range(0, 12)])
-        dv2 = sum([int(v[i]) * c2[i] for i in range(0, 13)])
-        dv1 = 11 - dv1 % 11 if dv1 % 11 > 2 else 0
-        dv2 = 11 - dv2 % 11 if dv2 % 11 > 2 else 0
-        dvs = f"{dv1}{dv2}"
-        return value[-2:] == dvs
+
+        base = value[:12]
+        dv_informado = value[12:]
+        dv_calculado = self._calculate_dvs(base)
+        return dv_informado == dv_calculado
 
 
 class CNES(CodigoValidavel):
@@ -467,11 +511,11 @@ class NUP(CodigoValidavel):
         return 17
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return f"{digits[:5]}.{digits[5:11]}/{digits[11:15]}-{digits[15:]}"
 
     def _is_valid(self, code: str) -> bool:
-        digits = self._only_digits(code)
+        digits = self._normalize(code)
         if len(digits) != 17:
             return False
 
@@ -515,7 +559,7 @@ class PIS(CodigoValidavel):
         return 11
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return f"{digits[:3]} {digits[3:6]} {digits[6:9]} {digits[9:]}"
 
     def _is_valid(self, code: str) -> bool:
@@ -551,7 +595,7 @@ class RENAVAM(CodigoValidavel):
         return 11
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return digits
 
     def _is_valid(self, code: str) -> bool:
@@ -586,7 +630,7 @@ class TituloEleitoral(CodigoValidavel):
         return 12
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return digits
 
     def _is_valid(self, code: str) -> bool:
@@ -637,7 +681,7 @@ class CertidaoRCPN(CodigoValidavel):
         return 32
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return (
             f"{digits[:6]}.{digits[6:8]}.{digits[8:10]}.{digits[10:14]}.{digits[14]}."
             f"{digits[15:20]}.{digits[20:23]}.{digits[23:30]}-{digits[30:]}"
@@ -647,7 +691,7 @@ class CertidaoRCPN(CodigoValidavel):
         if code is None:
             return False
 
-        digits = self._only_digits(code)
+        digits = self._normalize(code)
         if len(digits) != self._full_digits:
             return False
 
@@ -722,7 +766,7 @@ class Telefone(CodigoValidavel):
         return 11
 
     def _mask_code(self, code: str) -> str:
-        digits = self._only_digits(code).zfill(self._full_digits)
+        digits = self._normalize(code).zfill(self._full_digits)
         return f"({digits[:2]}) {digits[2:7]}-{digits[7:]}"
 
     def _is_valid(self, code: str) -> bool:
@@ -751,7 +795,7 @@ class Passaporte(CodigoValidavel):
         return 8
 
     def _mask_code(self, code: str) -> str:
-        return self._only_digits(code).zfill(self._full_digits)
+        return self._normalize(code).zfill(self._full_digits)
 
     def _is_valid(self, code: str) -> bool:
         digits = self._basic_digits_validation(code)
@@ -781,7 +825,7 @@ class PlacaVeicular(CodigoValidavel):
         return 7
 
     def _mask_code(self, code: str) -> str:
-        return self._only_digits(code).zfill(self._full_digits)
+        return self._normalize(code).zfill(self._full_digits)
 
     def _is_valid(self, code: str) -> bool:
         digits = self._basic_digits_validation(code)

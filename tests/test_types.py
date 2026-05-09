@@ -214,14 +214,24 @@ class TestCNS(TestCase):
 
 
 class TestCNPJ(TestCase):
-    def test_cnpj_valido(self):
+    def test_cnpj_valido_antigo(self):
         # CNPJ válido: 12.345.678/9000-05
-        cnpj = CNPJ("12345678900005")
-        self.assertEqual(cnpj.digitos, "12345678900005")
-        self.assertEqual(str(cnpj), "12.345.678/9000-05")
-        cnpj2 = CNPJ("12.345.678/9000-05")
-        self.assertEqual(cnpj2.digitos, "12345678900005")
-        self.assertEqual(str(cnpj2), "12.345.678/9000-05")
+        cnpj = CNPJ("12345678000195")
+        self.assertEqual(cnpj.digitos, "12345678000195")
+        self.assertEqual(str(cnpj), "12.345.678/0001-95")
+        cnpj2 = CNPJ("12.345.678/0001-95")
+        self.assertEqual(cnpj2.digitos, "12345678000195")
+        self.assertEqual(str(cnpj2), "12.345.678/0001-95")
+
+    def test_cnpj_valido_novo(self):
+        # CNPJ alfanumérico válido
+        cnpj = CNPJ("AA345678000386")
+        self.assertEqual(cnpj.digitos, "AA345678000386")
+        self.assertEqual(str(cnpj), "AA.345.678/0003-86")
+
+        cnpj2 = CNPJ("AA.345.678/0003-86")
+        self.assertEqual(cnpj2.digitos, "AA345678000386")
+        self.assertEqual(str(cnpj2), "AA.345.678/0003-86")
 
     def test_cnpj_invalido(self):
         # Inválido: todos dígitos iguais
@@ -233,6 +243,15 @@ class TestCNPJ(TestCase):
         # Inválido: DV errado
         with self.assertRaises(ValueError):
             CNPJ("12345678900000")
+
+        with self.assertRaises(ValueError):
+            CNPJ(None)
+
+        with self.assertRaises(ValueError):
+            CNPJ("AA3456780003AB")
+
+        with self.assertRaises(ValueError):
+            CNPJ("AA345678/0003-AB")
 
 
 class TestCodigoValidavel(TestCase):
