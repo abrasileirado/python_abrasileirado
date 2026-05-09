@@ -27,7 +27,7 @@ With validation, formating and unformating
 * ✅ CEP - Código de Endereçamento Postal - Empresa de Correio e Telegráfos (ECT)
 * ✅ EnderecoBrasil - ECT
 * ✅ CPF - Cadastro de Pessoa Física - Receita Federal do Brasil (RFB)
-* ✅ CNPJ - Cadastro Nacional de Pessoa Jurídica - RFB
+* ✅ CNPJ (new and old standard) - Cadastro Nacional de Pessoa Jurídica - RFB
 * ✅ CNES - Cadastro Nacional de Estabelecimento de Saúde - DATASUS
 * ✅ CNS - Cadastro Nacional de Saúde (Cartão SUS) - DATASUS
 * ✅ PIS - Programa de Integração Social - Tesouro Nacional
