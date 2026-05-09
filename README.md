@@ -13,10 +13,10 @@ Python library specific brazilian objects and validations.
 FAQ 1:
 > Why I create abrasileirado? Because **this is Brazil** (Toretto, 2020).
 
-FAQ 1:
+FAQ 2:
 > Why are classes, properties, and methods in Portuguese? (Toretto, 2020) already answered.
 
-FAQ 1:
+FAQ 3:
 > Why not `validate-docbr`, `pycpfcnpj` or `brutils`?
 > Because I prefer Immutable classes and here we have more types implementeds. See [comparation](https://abrasileirado.github.io/python_abrasileirado/index.html).
 
