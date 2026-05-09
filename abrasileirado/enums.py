@@ -533,3 +533,13 @@ class NaturezaJuridicaEnum(IterableEnum):
     def __init__(self, value: Any, description: str, grupo: GrupoNaturezaJuridicaEnum) -> None:
         super().__init__(value, description)
         self.grupo = grupo
+
+
+class TipoLivroRcpnEnum(IterableEnum):
+    NASCIMENTO = (1, "Nascimento")
+    CASAMENTO = (2, "Casamento")
+    CASAMENTO_RELIGIOSO = (3, "Casamento religioso com efeito civil")
+    OBITO = (4, "Óbito")
+    NATIMORTO = (5, "Natimorto")
+    PROCLAMAS = (6, "Proclamas")
+    DEMAIS_ATOS = (7, "Demais atos")

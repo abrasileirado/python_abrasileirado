@@ -61,7 +61,6 @@ CNES validation                 ✅            ✅            🚫        ✅
 PIS validation                  ✅            ✅            🚫        ✅
 RENAVAM validation              ✅            ✅            🚫        ✅
 Titulo eleitoral validation     ✅            ✅            🚫        ✅
-CNJ validation                  ✅            🚫            🚫        🚫
 NUP validation                  ✅            🚫            🚫        🚫
 Telefone validation             ✅            🚫            🚫        🚫
 Passaporte validation           ✅            🚫            🚫        🚫

@@ -10,9 +10,41 @@
 
 Python library specific brazilian objects and validations.
 
+FAQ 1:
 > Why I create abrasileirado? Because **this is Brazil** (Toretto, 2020).
 
-## Data types
+FAQ 1:
+> Why are classes, properties, and methods in Portuguese? (Toretto, 2020) already answered.
+
+FAQ 1:
+> Why not `validate-docbr`, `pycpfcnpj` or `brutils`?
+> Because I prefer Immutable classes and here we have more types implementeds. See [comparation](https://abrasileirado.github.io/python_abrasileirado/index.html).
+
+## Immutable classes
+
+With validation, formating and unformating
+
+* ✅ CEP - Código de Endereçamento Postal - Empresa de Correio e Telegráfos (ECT)
+* ✅ EnderecoBrasil - ECT
+* ✅ CPF - Cadastro de Pessoa Física - Receita Federal do Brasil (RFB)
+* ✅ CNPJ - Cadastro Nacional de Pessoa Jurídica - RFB
+* ✅ CNES - Cadastro Nacional de Estabelecimento de Saúde - DATASUS
+* ✅ CNS - Cadastro Nacional de Saúde (Cartão SUS) - DATASUS
+* ✅ PIS - Programa de Integração Social - Tesouro Nacional
+* ✅ RENAVAM - Registro Nacional de Veículos Automotores - Secretaria Nacional de Trânsito (Senatran)
+* ✅ TituloEleitoral - Tribunal Superior Eleitoral - TSE
+* ✅ Telefone - Agência Nacional de Telecomunicações (Anatel)
+* ✅ Passaporte - Polícia Federal (PF)
+* ✅ PlacaVeicular - Conselho Nacional de Trânsito (CONTRAN)
+* ✅ NUP - Número Único de Processo - Conselho Nacional de Justiça (CNJ)
+* ✅ CertidaoRCPN - Certidão de nascimento, casamento e outros - Conselho Nacional de Justiça (CNJ)
+
+CEP, EnderecoBrasil, CPF, CNPJ, CNH, CNS, CNES, PIS, RENAVAM, Titulo
+eleitoral, NUP, Telefone, Passaporte, Placa veicular, Certidão
+
+## Enums
+
+In accordance with regulatory bodies
 
 * ✅ Sim/Não (Enum)
 * ✅ Estado Civil (Enum) - Instituto Brasileiro de Geografia e Estatística (IBGE)
@@ -23,11 +55,9 @@ Python library specific brazilian objects and validations.
 * ✅ Zona de habitação (Enum) - IBGE
 * ✅ Região geopolítica (Enum) - IBGE
 * ✅ Unidade federativa (Enum) - IBGE
-* ✅ CEP - Código de Endereçamento Postal - Empresa de Correio e Telegráfos (ECT)
-* ✅ CNES - Cadastro Nacional de Estabelecimento de Saúde - DATASUS
-* ✅ CNS - Cadastro Nacional de Saúde (Cartão SUS) - DATASUS
-* ✅ CPF - Cadastro de Pessoa Física - Receita Federal do Brasil (RFB)
-* ✅ CNPJ - Cadastro Nacional de Pessoa Jurídica - RFB
+* ✅ Grupo de natureza jurídica (Enum) - IBGE
+* ✅ Natureza jurídica (Enum) - IBGE
+
 * 🚫 Modulo11
 * 🚫 ProtocoloIntegrado
 * 🚫 ProtocoloJustica
